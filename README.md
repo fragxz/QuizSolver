@@ -13,6 +13,6 @@ Add Tesseract OCR to your system variables:
 - new VARIABLE "TESSDATA_PREFIX" - path (for example): "C:\Program Files (x86)\Tesseract-OCR\tessdata"
 - new SYSTEM VARIABLE - PATH (for example): C:\Program Files (x86)\Tesseract-OCR\
 
-Take a look at the "QuizMaster-ProgrammPlan.png" and "example.png" to understand how the Python script works.
+Take a look at the "QuizMaster-ProgrammPlan.png" and "example.png" to understand how the Python script works and how you can configure the width and height values for your individual needs.
 
-Start "QuizMaster.py" - you should be ready to go!
+Start "QuizMaster.py" & you should be ready to go!
