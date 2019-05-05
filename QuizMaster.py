@@ -50,44 +50,43 @@ mratioDifferenceFloat = 0.6 #float-value to define the ratio of likeness between
 nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","4":"vier","5":"fünf","6":"sechs","7":"sieben","8":"acht","9":"neun","10":"zehn","11":"elf","12":"zwölf","13":"dreizehn","14":"vierzehn","15":"fünfzehn","16":"sechszehn","17":"siebzehn","18":"achtzehn","19":"neunzehn","20":"zwangzig"}
 
 DefiniereBereich_AntwortA = (834, 592, 1423, 682) #defines the area of Answer A
-QuizmasterAntwortAArea = im.crop(DefiniereBereich_AntwortA)
+QuizmasterAntwortAArea = im.crop(DefiniereBereich_AntwortA) #slices the screenshot into the defined area for the answer A
 AntwortA_SavePath = userpath + "\\cs_antworta.png"
 QuizmasterAntwortAArea.save(AntwortA_SavePath)
 AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu") #config='-psm 5'
-if not AntwortAText: #Wenn AntwortAText keinen Wert hat, handelt es sich evtl um einen einzelnen Buchstaben / Charakter. In dem Fall Config aktivieren
+if not AntwortAText: #If AntwortAText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
    AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu",config='--psm 6')
     
 DefiniereBereich_AntwortB = (832, 737, 1425, 824) #defines the area of Answer B
-QuizmasterAntwortBArea = im.crop(DefiniereBereich_AntwortB)
+QuizmasterAntwortBArea = im.crop(DefiniereBereich_AntwortB) #slices the screenshot into the defined area for the answer B
 AntwortB_SavePath = userpath + "\\cs_antwortb.png"
 QuizmasterAntwortBArea.save(AntwortB_SavePath)
 AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu")
-if not AntwortBText: #Wenn AntwortBText keinen Wert hat, handelt es sich evtl um einen einzelnen Buchstaben / Charakter. In dem Fall Config aktivieren
+if not AntwortBText: #If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
    AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu",config='--psm 6')
 
 DefiniereBereich_AntwortC = (833, 879, 1422, 969) #defines the area of Answer C
-QuizmasterAntwortCArea = im.crop(DefiniereBereich_AntwortC)
+QuizmasterAntwortCArea = im.crop(DefiniereBereich_AntwortC) #slices the screenshot into the defined area for the answer C
 AntwortC_SavePath = userpath + "\\cs_antwortc.png"
 QuizmasterAntwortCArea.save(AntwortC_SavePath)
 AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu")
-if not AntwortCText: #Wenn AntwortCText keinen Wert hat, handelt es sich evtl um einen einzelnen Buchstaben / Charakter. In dem Fall Config aktivieren
+if not AntwortCText: #If AntwortCText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
    AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu",config='--psm 6')
 
-DefiniereBereich_Frage = (789, 287, 1467, 495) #definiere Bereich der Frage
-QuizmasterArea_Frage = im.crop(DefiniereBereich_Frage) #entnehme aus dem Originalbild nur den definierten Bereich
+DefiniereBereich_Frage = (789, 287, 1467, 495) #defines the question-area
+QuizmasterArea_Frage = im.crop(DefiniereBereich_Frage) #slices the screenshot into the defined area for the question
 Frage_SavePath = userpath + "\\cs_frage.png" #speicherort und name für die Frage
 QuizmasterArea_Frage.save(Frage_SavePath) #Befehl zum Speichern der Datei
-FrageText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),lang="deu") #Befehl der das Bild in Text verwandelt (Bild wird geöffnet (Angabe des Pfades), Sprachpaket / Trainingsdaten für pytesseract = arial)
-FrageText = FrageText.replace('\n', ' ') # Ersetzt den Zeichenumbruch mit einem Leerzeichen für optimierte Suche
+FrageText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),lang="deu") #command that converts the image into strings (it opens the image (that is located at the specified path), language packs / trained data for pytesseract))
+FrageText = FrageText.replace('\n', ' ') # replaces the line break (\n) with a space for an optimized search
 
-FrageTextReduziert = FrageText.lower() #setzt die frage auf kleinbuchstaben
+FrageTextReduziert = FrageText.lower() #sets all text content to lowercase characters
 zuEntfernendeWoerter = ['lautet','mit','den','eines','an','dem','auch','...?','wie','gibt','es','folgend','folgende','folgendes','folgenden','war','was','versteht','verstehen','man','unter','stehen','viele','bietet','eine','einen','ein','aus','auf','in','von','welcher','welches','welchen','welchem','der','die','das','des','dessen','kennt','man','wer','wie','was','wessen','ist','hat','fand','noch','nie','statt','erhielt','für','seine','seinen','ihre','ihren','zu','genau','?','..','...','heißt','hieß','heisst','heissen','heißen','geht','ging','gehen','zurück','und','einst','brachen','gerne','sieht','sehen']
 FrageTextReduziert = ' '.join(i for i in FrageTextReduziert.split() if i not in zuEntfernendeWoerter)
-FrageTextReduziert = FrageTextReduziert.replace("?", "") #Entfernt das Fragezeichen
+FrageTextReduziert = FrageTextReduziert.replace("?", "") #removes the Questionmark (?) from the question text
 
 
-
-#öffne gefundenen Text als Google-Suchergebnis
+#opens the browser with the detected text as a google-search query
 new=2;
 google = "https://www.google.de/search?q="
 anzahlSuchergebnisse = '30'
@@ -97,49 +96,50 @@ urlB=google+AntwortBText;
 urlC=google+AntwortCText;
 urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse;
 
-pyperclip.copy(FrageTextReduziert) #Kopiert Frage in die Zwischenablage
+pyperclip.copy(FrageTextReduziert) #copies the question text into the clipboard
 
-#Vollständiges HTML RESULT
-r = requests.get(urlF) #get FRAGE URL
+#complete HTML result
+r = requests.get(urlF) #get question URL
 resultText = r.text
 
-#Entferne HEAD - übrig bleibt BODY
-resultbodyCut = resultText.split('</head>') #entfernt head bereich
-resultbody = resultbodyCut[1] #enthält nur noch HTML Resultr von <body> bis </body>
+#removes the Html head -> only the body-content remains
+resultbodyCut = resultText.split('</head>') #remove the head content
+resultbody = resultbodyCut[1] #only contains the HTML content from <body> until the end
 
 # REGEX -------------------------- 
 regexStyle = r"<style\b[^>]*>(.*?)</style>" #regex <style> tags
 regexScript = r"<script\b[^>]*>(.*?)</script>" #regex <script> tags
 test_str = resultbody
 subst = ""
-regexedRemoveStyle = re.sub(regexStyle, subst, test_str, 0) #entfernt style inhalte
-regexedRemoveScript = re.sub(regexScript, subst, test_str, 0) #entfernt script inhalte
+regexedRemoveStyle = re.sub(regexStyle, subst, test_str, 0) #removes style content
+regexedRemoveScript = re.sub(regexScript, subst, test_str, 0) #removes script content
 # -------------------------- REGEX
 
 # CLEAN HTML TAGS --------------------
 htmlCleanedResult = cleanhtml(regexedRemoveScript)
 # -------------------- CLEAN HTML TAGS 
 
-# Satzzeichen CLEARING --------------------
+# punctuation mark CLEARING --------------------
 keineSatzzeichenResult = re.sub(r'[^\w\s]','',htmlCleanedResult)
-# -------------------- Satzzeichen CLEARING
+# -------------------- punctuation mark CLEARING
 
 
-# Entferne GOOGLE HEADER -------------
+# removes GOOGLE HEADER -------------
 resultRemoveGoogleHeader = keineSatzzeichenResult.split('ErgebnisseWortwörtlichUngefähr') 
 cleanedResult = resultRemoveGoogleHeader[1] 
-# ------------- Entferne GOOGLE HEADER
+# ------------- removes GOOGLE HEADER
 
-ergebnisliste = cleanedResult.split() #splitte ergebnise in eine wörterliste
-print (FrageText+'\n') #Ausgabe der Frage
+ergebnisliste = cleanedResult.split() #splits multiple results into a word-list
+print (FrageText+'\n') #print the question
 
+#prints the answer
 if debugResult == '1':
    print(cleanedResult)
    print(AntwortAText)
    print(AntwortBText)
    print(AntwortCText)
 
-#REAC print ('======== Antwort A ========')
+#REAC print ('======== Answer A ========')
 
 # AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
    
@@ -220,7 +220,7 @@ wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
 #REAC print (f'\nErgebnisse: {ergebnisAnzahlA}') #A
 #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungA}') #A
 
-#REAC print ('\n\n======== Antwort B ========')
+#REAC print ('\n\n======== Answer B ========')
 
 # BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
@@ -284,7 +284,7 @@ wahrscheinlichkeitenDictionary['B'] = prozentualeUebereinstimmungB
 #REAC print (f'\nErgebnisse: {ergebnisAnzahlB}') #B
 #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungB}') #B
 
-#REAC print ('\n\n======== Antwort C ========')
+#REAC print ('\n\n======== Answer C ========')
 
 # CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
