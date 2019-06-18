@@ -16,3 +16,8 @@ Add Tesseract OCR to your system variables:
 Take a look at the "QuizMaster-ProgrammPlan.png" and "example.png" to understand how the Python script works and how you can configure the width and height values for your individual needs.
 
 Start "QuizMaster.py" & you should be ready to go!
+
+
+Share ♥ - If this project helped you, please consider supporting me!
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/fredericreinhardt)
