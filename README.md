@@ -1,4 +1,4 @@
-# QuizMaster
+# QuizSolver - formerly known as the "QuizMaster"
 python based script to solve quiz questions based on search engine result similarities
 
 How to:
