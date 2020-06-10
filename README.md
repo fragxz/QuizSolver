@@ -4,8 +4,6 @@ python based script to solve quiz questions based on search engine result simila
 ## Video ##
 https://youtu.be/m7FjZdcMkLE
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/m7FjZdcMkLE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## How to ##
 
 Requirements:
