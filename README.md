@@ -1,7 +1,10 @@
 # QuizSolver - formerly known as the "QuizMaster"
 python based script to solve quiz questions based on search engine result similarities
 
-How to:
+## Video ##
+https://youtu.be/m7FjZdcMkLE
+
+## How to ##
 
 Requirements:
 - Python, for example 3.7
