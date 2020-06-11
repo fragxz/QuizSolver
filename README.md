@@ -2,7 +2,7 @@
 python based script to solve quiz questions based on search engine result similarities
 
 ## Video ##
-https://youtu.be/m7FjZdcMkLE
+https://www.youtube.com/watch?v=ZoEyQa4WWGc
 
 ## How to ##
 
