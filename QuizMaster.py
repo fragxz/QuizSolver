@@ -29,7 +29,7 @@ snapshot = PIL.ImageGrab.grab() #used to create a screenshot
 
 devmode = '0' #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = '0' #If debugResult = 1 > enables debugging of the result
-userpath = "C:\\Users\\YourName\\Desktop" #configure your userpath here, for example: "C:\\Users\\YourName\\"
+userpath = "C:\\Users\\YourName\\Desktop" #configure your userpath here, for example: "C:\\Users\\YourName\\"  TODO script path nutzen | environment var / special folder
 
 im = Image.open(userpath + "\\example.png") #only used in DEV mode
 
@@ -142,7 +142,7 @@ if debugResult == '1':
 #REAC print ('======== Answer A ========')
 
 # AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-   
+
 Asplit = AntwortAText.split() # splitte antwort A | zB von "Die Alten Ägypter" in ['Die', 'Alten', 'Ägypter']
 
 #INTERESSANT: if AntwortAText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
@@ -164,59 +164,63 @@ ungefaehreTreffer_ListA = []
 ungefaehreTreffer_ListB = []
 ungefaehreTreffer_ListC = []
 
-# EXAKTE Treffer -----------------------------------
-if AntwortAText in cleanedResult:
-   #exakteTreffer_A = cleanedResult.count(AntwortAText)
-   for x in ergebnisliste:
-      if x == AntwortAText:
-         exakteTreffer_ListA.append(x)
 
-#.lower()
+antwortA()
 
-#testA = sum(1 for match in re.finditer(r"\b{}\b", contents))
+def antwortA():
+    # EXAKTE Treffer -----------------------------------
+    if AntwortAText in cleanedResult:
+       #exakteTreffer_A = cleanedResult.count(AntwortAText)
+       for x in ergebnisliste:
+          if x == AntwortAText:
+             exakteTreffer_ListA.append(x)
 
-#print(cleanedResult)
-# ----------------------------------- EXAKTE Treffer
+    #.lower()
 
-for x in Asplit: #iteriere über das Array Asplit (gesplittete Antwort) (zB for Die.... | for Alten.... | for Ägypter...)
-    ratiosAddiertA = 0 #addiere alle Ratios der Ergebnisse (zB wenn 3 ergebnisse zu 100% übereinstimmen: 3.0 | wenn 3 ergebnisse zu 50% übereinstimmen: 1.5)
-    if x in cleanedResult:
-       ungefaehreTreffer_ListA.append(x)
+    #testA = sum(1 for match in re.finditer(r"\b{}\b", contents))
 
-    ungefaehreTreffer_A = len(ungefaehreTreffer_ListA)
+    #print(cleanedResult)
+    # ----------------------------------- EXAKTE Treffer
 
-    if ungefaehreTreffer_A<20:
-       b = difflib.get_close_matches(x, ergebnisliste, 10) #Ausgabe von bis zu 10 ähnlichen Ergebnissen
-   # ENTFERNE AUS WÖRTER ARRAY dieser ANTWORT den Inhalt ANDERER ANTWORTEN (zB 1953 (AntwortB) aus A entfernen, wenn Antwort A 1954 ist)
-       if len(Asplit)==1: #Wenn die Antwort nur ein Wort hat, dann fahre fort, WICHTIG, da es bei mehreren Wörtern sonst zu problemen kommen kann
-          while AntwortBText in b:
-             b.remove(AntwortBText) #entferne AntwortB aus dem Array von AntwortA
-             #print ('DEBUG in A>B entfernt')
-          while AntwortCText in b:
-             b.remove(AntwortCText) #entferne AntwortB aus dem Array von AntwortA
-          #print ('DEBUG in A>C entfernt')
+    for x in Asplit: #iteriere über das Array Asplit (gesplittete Antwort) (zB for Die.... | for Alten.... | for Ägypter...)
+        ratiosAddiertA = 0 #addiere alle Ratios der Ergebnisse (zB wenn 3 ergebnisse zu 100% übereinstimmen: 3.0 | wenn 3 ergebnisse zu 50% übereinstimmen: 1.5)
+        if x in cleanedResult:
+           ungefaehreTreffer_ListA.append(x)
 
-       ergebnisAnzahlA += len(b)
-       for y in b:
-          m = SequenceMatcher(None, y, x) # Vergleiche Inhalte der list b (also y) mit dem aktuellen gesplitteten wort der Asplit list (also x).
-          mratioA = m.ratio()
-          if mratioA > mratioDifferenceFloat:
-             ratiosAddiertA += m.ratio()
-       if len(b):
-          ratioProzentA = (ratiosAddiertA / len(b)) * 100 #Berechne Prozentuale Übereinstimmung
-       else: #Ansonsten gebe diesem Ergebnis nur eine sehr geringe Wertung: 0%
-          ratioProzentA = 0 
-    prozentualeUebereinstimmungA += ratioProzentA
-    zsmgAntwortA += difflib.get_close_matches(x, ergebnisliste, 1) # Setze Wörter von A zusammen
-    #print (f'{b}\n') #Array Ausgabe wie ['Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai.', 'Shanghai,']
-    nAD = nummernAusgeschriebenDictionary.get(x) #wandelt Zahlen in Wörter um (zB "8" zu "acht")
-    if nAD: #wenn nummernAusgeschriebenDictionary.get(x) existiert
-        numericAusgeschrieben = difflib.get_close_matches(nAD, ergebnisliste, 6) #ähnliche ergebnisse zu der ausgeschriebenen Zahl (zB statt "8" sucht er nun nach "acht")
-        print (numericAusgeschrieben) #Ausgabe der gefundenen Ergebnisse
+        ungefaehreTreffer_A = len(ungefaehreTreffer_ListA)
 
-prozentualeUebereinstimmungA = round(prozentualeUebereinstimmungA / len(Asplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
-prozentualeUebereinstimmungA = (prozentualeUebereinstimmungA * 0.8) + ergebnisAnzahlA #DEBUG / TEST
-wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
+        if ungefaehreTreffer_A<20:
+           b = difflib.get_close_matches(x, ergebnisliste, 10) #Ausgabe von bis zu 10 ähnlichen Ergebnissen
+       # ENTFERNE AUS WÖRTER ARRAY dieser ANTWORT den Inhalt ANDERER ANTWORTEN (zB 1953 (AntwortB) aus A entfernen, wenn Antwort A 1954 ist)
+           if len(Asplit)==1: #Wenn die Antwort nur ein Wort hat, dann fahre fort, WICHTIG, da es bei mehreren Wörtern sonst zu problemen kommen kann
+              while AntwortBText in b:
+                 b.remove(AntwortBText) #entferne AntwortB aus dem Array von AntwortA
+                 #print ('DEBUG in A>B entfernt')
+              while AntwortCText in b:
+                 b.remove(AntwortCText) #entferne AntwortB aus dem Array von AntwortA
+              #print ('DEBUG in A>C entfernt')
+
+           ergebnisAnzahlA += len(b)
+           for y in b:
+              m = SequenceMatcher(None, y, x) # Vergleiche Inhalte der list b (also y) mit dem aktuellen gesplitteten wort der Asplit list (also x).
+              mratioA = m.ratio()
+              if mratioA > mratioDifferenceFloat:
+                 ratiosAddiertA += m.ratio()
+           if len(b):
+              ratioProzentA = (ratiosAddiertA / len(b)) * 100 #Berechne Prozentuale Übereinstimmung
+           else: #Ansonsten gebe diesem Ergebnis nur eine sehr geringe Wertung: 0%
+              ratioProzentA = 0
+        prozentualeUebereinstimmungA += ratioProzentA
+        zsmgAntwortA += difflib.get_close_matches(x, ergebnisliste, 1) # Setze Wörter von A zusammen
+        #print (f'{b}\n') #Array Ausgabe wie ['Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai.', 'Shanghai,']
+        nAD = nummernAusgeschriebenDictionary.get(x) #wandelt Zahlen in Wörter um (zB "8" zu "acht")
+        if nAD: #wenn nummernAusgeschriebenDictionary.get(x) existiert
+            numericAusgeschrieben = difflib.get_close_matches(nAD, ergebnisliste, 6) #ähnliche ergebnisse zu der ausgeschriebenen Zahl (zB statt "8" sucht er nun nach "acht")
+            print (numericAusgeschrieben) #Ausgabe der gefundenen Ergebnisse
+
+    prozentualeUebereinstimmungA = round(prozentualeUebereinstimmungA / len(Asplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
+    prozentualeUebereinstimmungA = (prozentualeUebereinstimmungA * 0.8) + ergebnisAnzahlA #DEBUG / TEST
+    wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
 #REAC print (f'\nErgebnisse: {ergebnisAnzahlA}') #A
 #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungA}') #A
 
@@ -360,31 +364,31 @@ exakteTreffer_C = len(exakteTreffer_ListC)
 
 
 if exakteTreffer_A>0:
-   print (f'\n A - EXAKTE TREFFER | {AntwortAText}:  {exakteTreffer_A}x  ||  {exakteTreffer_ListA[:5]}')
+   print ('\n A - EXAKTE TREFFER | {AntwortAText}:  {exakteTreffer_A}x  ||  {exakteTreffer_ListA[:5]}')
 
 if exakteTreffer_B>0:
-   print (f'\n B - EXAKTE TREFFER | {AntwortBText}:  {exakteTreffer_B}x  ||  {exakteTreffer_ListB[:5]}')
+   print ('\n B - EXAKTE TREFFER | {AntwortBText}:  {exakteTreffer_B}x  ||  {exakteTreffer_ListB[:5]}')
    
 if exakteTreffer_C>0:
-   print (f'\n C - EXAKTE TREFFER | {AntwortCText}:  {exakteTreffer_C}x  ||  {exakteTreffer_ListC[:5]}')
+   print ('\n C - EXAKTE TREFFER | {AntwortCText}:  {exakteTreffer_C}x  ||  {exakteTreffer_ListC[:5]}')
 
 
 if ((exakteTreffer_A == 0) and (exakteTreffer_B == 0) and (exakteTreffer_C == 0)):
    if ungefaehreTreffer_A>0:
-      print (f'\n A - ungefaher | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
+      print ('\n A - ungefaher | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
 
    if ungefaehreTreffer_B>0:
-      print (f'\n B - ungefaher | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
+      print ('\n B - ungefaher | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
 
    if ungefaehreTreffer_C>0:
-      print (f'\n C - ungefaher | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
+      print ('\n C - ungefaher | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
       
 
 if "nicht" in FrageText: #Abfrage ob Frage negiert wird
-   print (f'\nACHTUNG: Das Wort "nicht" wurde gefunden - GGF JOKER VERWENDEN')
+   print ('\nACHTUNG: Das Wort "nicht" wurde gefunden - GGF JOKER VERWENDEN')
 
 if "kein" in FrageText: #Abfrage ob Frage negiert wird
-   print (f'\nACHTUNG: Das Wort "kein" wurde gefunden - GGF JOKER VERWENDEN')
+   print ('\nACHTUNG: Das Wort "kein" wurde gefunden - GGF JOKER VERWENDEN')
 
 AntwortenWahrscheinlichkeitSortiert = sorted(wahrscheinlichkeitenDictionary, key=wahrscheinlichkeitenDictionary.get, reverse=True) #sortiert die Wahrscheinlichkeiten der Antworten absteigend; ex: "90, 80, 60"
 AntwortenWahrscheinlichkeitAlleWerteEntsprechenNull = True 
