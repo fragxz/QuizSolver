@@ -149,25 +149,17 @@ if debugResult == '1':
 
 # AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-Asplit = AntwortAText.split() # splitte antwort A | zB von "Die Alten Ägypter" in ['Die', 'Alten', 'Ägypter']
 
-#INTERESSANT: if AntwortAText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
-   #print (AntwortAText)
-   
-zsmgAntwortA = ['zsmgAntwortA: '] #zusammengesetzteAntwort A
-mostcommonA = [] #mostCommon A
-prozentualeUebereinstimmungA = 0
-ratioProzentA = 0
-mratioA = 0
-ergebnisAnzahlA = 0 #Addiert ALLE Ergebnisse die gefunden wurden zusammen (zB "Die Alten Ägypter" - 3x Die 10x Alten 15x Ägypten = 28 Ergebnisse die übereinstimmen)
 exakteTreffer_ListA = []
-exakteTreffer_ListB = []
-exakteTreffer_ListC = []
 ungefaehreTreffer_A = 0
-ungefaehreTreffer_B = 0
-ungefaehreTreffer_C = 0
 ungefaehreTreffer_ListA = []
+
+exakteTreffer_ListB = []
+ungefaehreTreffer_B = 0
 ungefaehreTreffer_ListB = []
+
+exakteTreffer_ListC = []
+ungefaehreTreffer_C = 0
 ungefaehreTreffer_ListC = []
 
 
@@ -237,6 +229,16 @@ if zeitmessungAktiv == 1:
 
 
 def answerA():
+    Asplit = AntwortAText.split() # splitte antwort A | zB von "Die Alten Ägypter" in ['Die', 'Alten', 'Ägypter']
+    #INTERESSANT: if AntwortAText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
+       #print (AntwortAText)
+
+    zsmgAntwortA = ['zsmgAntwortA: '] #zusammengesetzteAntwort A
+    mostcommonA = [] #mostCommon A
+    prozentualeUebereinstimmungA = 0
+    ratioProzentA = 0
+    mratioA = 0
+    ergebnisAnzahlA = 0 #Addiert ALLE Ergebnisse die gefunden wurden zusammen (zB "Die Alten Ägypter" - 3x Die 10x Alten 15x Ägypten = 28 Ergebnisse die übereinstimmen)
     # EXAKTE Treffer -----------------------------------
     if AntwortAText in cleanedResult:
        #exakteTreffer_A = cleanedResult.count(AntwortAText)
