@@ -150,17 +150,11 @@ if debugResult == '1':
 # AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 
-exakteTreffer_ListA = []
-ungefaehreTreffer_A = 0
-ungefaehreTreffer_ListA = []
 
-exakteTreffer_ListB = []
-ungefaehreTreffer_B = 0
-ungefaehreTreffer_ListB = []
 
-exakteTreffer_ListC = []
-ungefaehreTreffer_C = 0
-ungefaehreTreffer_ListC = []
+
+
+
 
 
 answerA()
@@ -229,6 +223,11 @@ if zeitmessungAktiv == 1:
 
 
 def answerA():
+    # init var
+    exakteTreffer_ListA = []
+    ungefaehreTreffer_A = 0
+    ungefaehreTreffer_ListA = []
+
     Asplit = AntwortAText.split() # splitte antwort A | zB von "Die Alten Ägypter" in ['Die', 'Alten', 'Ägypter']
     #INTERESSANT: if AntwortAText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
        #print (AntwortAText)
@@ -299,6 +298,11 @@ def answerA():
 # ---
 
 def answerB():
+    # init var
+    exakteTreffer_ListB = []
+    ungefaehreTreffer_B = 0
+    ungefaehreTreffer_ListB = []
+
     Bsplit = AntwortBText.split() # splitte antwort B
 
     #if AntwortBText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
@@ -363,6 +367,11 @@ def answerB():
 # -------
 
 def answerC():
+    # init var
+    exakteTreffer_ListC = []
+    ungefaehreTreffer_C = 0
+    ungefaehreTreffer_ListC = []
+
     Csplit = AntwortCText.split() # splitte antwort C
 
     #if AntwortCText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
