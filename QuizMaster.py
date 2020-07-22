@@ -173,62 +173,6 @@ ungefaehreTreffer_ListC = []
 
 antwortA()
 
-def antwortA():
-    # EXAKTE Treffer -----------------------------------
-    if AntwortAText in cleanedResult:
-       #exakteTreffer_A = cleanedResult.count(AntwortAText)
-       for x in ergebnisliste:
-          if x == AntwortAText:
-             exakteTreffer_ListA.append(x)
-
-    #.lower()
-
-    #testA = sum(1 for match in re.finditer(r"\b{}\b", contents))
-
-    #print(cleanedResult)
-    # ----------------------------------- EXAKTE Treffer
-
-    for x in Asplit: #iteriere über das Array Asplit (gesplittete Antwort) (zB for Die.... | for Alten.... | for Ägypter...)
-        ratiosAddiertA = 0 #addiere alle Ratios der Ergebnisse (zB wenn 3 ergebnisse zu 100% übereinstimmen: 3.0 | wenn 3 ergebnisse zu 50% übereinstimmen: 1.5)
-        if x in cleanedResult:
-           ungefaehreTreffer_ListA.append(x)
-
-        ungefaehreTreffer_A = len(ungefaehreTreffer_ListA)
-
-        if ungefaehreTreffer_A<20:
-           b = difflib.get_close_matches(x, ergebnisliste, 10) #Ausgabe von bis zu 10 ähnlichen Ergebnissen
-       # ENTFERNE AUS WÖRTER ARRAY dieser ANTWORT den Inhalt ANDERER ANTWORTEN (zB 1953 (AntwortB) aus A entfernen, wenn Antwort A 1954 ist)
-           if len(Asplit)==1: #Wenn die Antwort nur ein Wort hat, dann fahre fort, WICHTIG, da es bei mehreren Wörtern sonst zu problemen kommen kann
-              while AntwortBText in b:
-                 b.remove(AntwortBText) #entferne AntwortB aus dem Array von AntwortA
-                 #print ('DEBUG in A>B entfernt')
-              while AntwortCText in b:
-                 b.remove(AntwortCText) #entferne AntwortB aus dem Array von AntwortA
-              #print ('DEBUG in A>C entfernt')
-
-           ergebnisAnzahlA += len(b)
-           for y in b:
-              m = SequenceMatcher(None, y, x) # Vergleiche Inhalte der list b (also y) mit dem aktuellen gesplitteten wort der Asplit list (also x).
-              mratioA = m.ratio()
-              if mratioA > mratioDifferenceFloat:
-                 ratiosAddiertA += m.ratio()
-           if len(b):
-              ratioProzentA = (ratiosAddiertA / len(b)) * 100 #Berechne Prozentuale Übereinstimmung
-           else: #Ansonsten gebe diesem Ergebnis nur eine sehr geringe Wertung: 0%
-              ratioProzentA = 0
-        prozentualeUebereinstimmungA += ratioProzentA
-        zsmgAntwortA += difflib.get_close_matches(x, ergebnisliste, 1) # Setze Wörter von A zusammen
-        #print (f'{b}\n') #Array Ausgabe wie ['Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai.', 'Shanghai,']
-        nAD = nummernAusgeschriebenDictionary.get(x) #wandelt Zahlen in Wörter um (zB "8" zu "acht")
-        if nAD: #wenn nummernAusgeschriebenDictionary.get(x) existiert
-            numericAusgeschrieben = difflib.get_close_matches(nAD, ergebnisliste, 6) #ähnliche ergebnisse zu der ausgeschriebenen Zahl (zB statt "8" sucht er nun nach "acht")
-            print (numericAusgeschrieben) #Ausgabe der gefundenen Ergebnisse
-
-    prozentualeUebereinstimmungA = round(prozentualeUebereinstimmungA / len(Asplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
-    prozentualeUebereinstimmungA = (prozentualeUebereinstimmungA * 0.8) + ergebnisAnzahlA #DEBUG / TEST
-    wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
-#REAC print (f'\nErgebnisse: {ergebnisAnzahlA}') #A
-#REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungA}') #A
 
 #REAC print ('\n\n======== Answer B ========')
 
@@ -418,3 +362,65 @@ webbrowser.open(urlF,new);
 if zeitmessungAktiv == 1:
    end = time.time()
    print(end - start)
+
+
+
+# ---------------------- FUNCTIONS
+
+
+def antwortA():
+    # EXAKTE Treffer -----------------------------------
+    if AntwortAText in cleanedResult:
+       #exakteTreffer_A = cleanedResult.count(AntwortAText)
+       for x in ergebnisliste:
+          if x == AntwortAText:
+             exakteTreffer_ListA.append(x)
+
+    #.lower()
+
+    #testA = sum(1 for match in re.finditer(r"\b{}\b", contents))
+
+    #print(cleanedResult)
+    # ----------------------------------- EXAKTE Treffer
+
+    for x in Asplit: #iteriere über das Array Asplit (gesplittete Antwort) (zB for Die.... | for Alten.... | for Ägypter...)
+        ratiosAddiertA = 0 #addiere alle Ratios der Ergebnisse (zB wenn 3 ergebnisse zu 100% übereinstimmen: 3.0 | wenn 3 ergebnisse zu 50% übereinstimmen: 1.5)
+        if x in cleanedResult:
+           ungefaehreTreffer_ListA.append(x)
+
+        ungefaehreTreffer_A = len(ungefaehreTreffer_ListA)
+
+        if ungefaehreTreffer_A<20:
+           b = difflib.get_close_matches(x, ergebnisliste, 10) #Ausgabe von bis zu 10 ähnlichen Ergebnissen
+       # ENTFERNE AUS WÖRTER ARRAY dieser ANTWORT den Inhalt ANDERER ANTWORTEN (zB 1953 (AntwortB) aus A entfernen, wenn Antwort A 1954 ist)
+           if len(Asplit)==1: #Wenn die Antwort nur ein Wort hat, dann fahre fort, WICHTIG, da es bei mehreren Wörtern sonst zu problemen kommen kann
+              while AntwortBText in b:
+                 b.remove(AntwortBText) #entferne AntwortB aus dem Array von AntwortA
+                 #print ('DEBUG in A>B entfernt')
+              while AntwortCText in b:
+                 b.remove(AntwortCText) #entferne AntwortB aus dem Array von AntwortA
+              #print ('DEBUG in A>C entfernt')
+
+           ergebnisAnzahlA += len(b)
+           for y in b:
+              m = SequenceMatcher(None, y, x) # Vergleiche Inhalte der list b (also y) mit dem aktuellen gesplitteten wort der Asplit list (also x).
+              mratioA = m.ratio()
+              if mratioA > mratioDifferenceFloat:
+                 ratiosAddiertA += m.ratio()
+           if len(b):
+              ratioProzentA = (ratiosAddiertA / len(b)) * 100 #Berechne Prozentuale Übereinstimmung
+           else: #Ansonsten gebe diesem Ergebnis nur eine sehr geringe Wertung: 0%
+              ratioProzentA = 0
+        prozentualeUebereinstimmungA += ratioProzentA
+        zsmgAntwortA += difflib.get_close_matches(x, ergebnisliste, 1) # Setze Wörter von A zusammen
+        #print (f'{b}\n') #Array Ausgabe wie ['Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai.', 'Shanghai,']
+        nAD = nummernAusgeschriebenDictionary.get(x) #wandelt Zahlen in Wörter um (zB "8" zu "acht")
+        if nAD: #wenn nummernAusgeschriebenDictionary.get(x) existiert
+            numericAusgeschrieben = difflib.get_close_matches(nAD, ergebnisliste, 6) #ähnliche ergebnisse zu der ausgeschriebenen Zahl (zB statt "8" sucht er nun nach "acht")
+            print (numericAusgeschrieben) #Ausgabe der gefundenen Ergebnisse
+
+    prozentualeUebereinstimmungA = round(prozentualeUebereinstimmungA / len(Asplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
+    prozentualeUebereinstimmungA = (prozentualeUebereinstimmungA * 0.8) + ergebnisAnzahlA #DEBUG / TEST
+    wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
+    #REAC print (f'\nErgebnisse: {ergebnisAnzahlA}') #A
+    #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungA}') #A
