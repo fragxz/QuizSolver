@@ -16,6 +16,10 @@ import requests
 from difflib import SequenceMatcher
 import difflib
 import string
+import pathlib
+import os.path
+
+currentWorkingDir = pathlib.Path().absolute()
 
 import re #regex
 
@@ -26,10 +30,12 @@ def cleanhtml(raw_html):
   return cleantext
 
 snapshot = PIL.ImageGrab.grab() #used to create a screenshot
-
 devmode = '0' #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = '0' #If debugResult = 1 > enables debugging of the result
-userpath = "C:\\Users\\YourName\\Desktop" #configure your userpath here, for example: "C:\\Users\\YourName\\"  TODO script path nutzen | environment var / special folder
+
+ImageSubdirectory = "Images"
+
+userpath = os.path.join(currentWorkingDir, ImageSubdirectory)
 
 im = Image.open(userpath + "\\example.png") #only used in DEV mode
 
