@@ -30,7 +30,7 @@ def cleanhtml(raw_html):
   return cleantext
 
 snapshot = PIL.ImageGrab.grab() #used to create a screenshot
-devmode = '0' #dev mode uses the "example.png"-file or any ohter file that you configured
+devmode = '1' #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = '0' #If debugResult = 1 > enables debugging of the result
 
 ImageSubdirectory = "Images"
@@ -149,18 +149,9 @@ if debugResult == '1':
 
 # AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-
-
-
-
-
-
-
-
 answerA()
 answerB()
 answerC()
-
 
 exakteTreffer_A = len(exakteTreffer_ListA) 
 exakteTreffer_B = len(exakteTreffer_ListB) 
