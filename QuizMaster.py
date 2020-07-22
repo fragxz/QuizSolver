@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+# TODO deutschen code refactored => into english
+
 zeitmessungAktiv = 0 #0 für aus, 1 für an. Zeitmessung bestimmt die Laufzeit des Skripts
 
 if zeitmessungAktiv == 1:
