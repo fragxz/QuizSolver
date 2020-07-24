@@ -59,7 +59,6 @@ mratioDifferenceFloat = 0.6 #float-value to define the ratio of likeness between
 # ---------------------- FUNCTIONS
 
 def answerA():
-    print("Asplit")
     # init var
     exakteTreffer_ListA = []
     ungefaehreTreffer_A = 0
