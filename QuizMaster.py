@@ -130,7 +130,7 @@ def answerA():
     wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
     #REAC print (f'\nErgebnisse: {ergebnisAnzahlA}') #A
     #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungA}') #A
-
+    return exakteTreffer_ListA;
 
 # ---
 
@@ -377,7 +377,7 @@ if debugResult == '1':
 
 # AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-answerA()
+exakteTreffer_ListA = answerA()
 answerB()
 answerC()
 
