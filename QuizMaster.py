@@ -272,7 +272,7 @@ def answerC():
     #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungC}') #C
 
     #REAC print (f'\n--------------------------------')
-    return exakteTreffer_ListB;
+    return exakteTreffer_ListC;
 #
 
 
