@@ -63,11 +63,7 @@ def answerA():
     exakteTreffer_ListA = []
     ungefaehreTreffer_A = 0
     ungefaehreTreffer_ListA = []
-
     Asplit = AntwortAText.split() # splitte antwort A | zB von "Die Alten Ägypter" in ['Die', 'Alten', 'Ägypter']
-    #INTERESSANT: if AntwortAText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
-       #print (AntwortAText)
-
     zsmgAntwortA = ['zsmgAntwortA: '] #zusammengesetzteAntwort A
     mostcommonA = [] #mostCommon A
     prozentualeUebereinstimmungA = 0
@@ -96,10 +92,8 @@ def answerA():
            if len(Asplit)==1: #Wenn die Antwort nur ein Wort hat, dann fahre fort, WICHTIG, da es bei mehreren Wörtern sonst zu problemen kommen kann
               while AntwortBText in b:
                  b.remove(AntwortBText) #entferne AntwortB aus dem Array von AntwortA
-                 #print ('DEBUG in A>B entfernt')
               while AntwortCText in b:
-                 b.remove(AntwortCText) #entferne AntwortB aus dem Array von AntwortA
-              #print ('DEBUG in A>C entfernt')
+                 b.remove(AntwortCText) #entferne AntwortC aus dem Array von AntwortA
 
            ergebnisAnzahlA += len(b)
            for y in b:
@@ -113,7 +107,6 @@ def answerA():
               ratioProzentA = 0
         prozentualeUebereinstimmungA += ratioProzentA
         zsmgAntwortA += difflib.get_close_matches(x, ergebnisliste, 1) # Setze Wörter von A zusammen
-        #print (f'{b}\n') #Array Ausgabe wie ['Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai', 'Shanghai.', 'Shanghai,']
         nAD = nummernAusgeschriebenDictionary.get(x) #wandelt Zahlen in Wörter um (zB "8" zu "acht")
         if nAD: #wenn nummernAusgeschriebenDictionary.get(x) existiert
             numericAusgeschrieben = difflib.get_close_matches(nAD, ergebnisliste, 6) #ähnliche ergebnisse zu der ausgeschriebenen Zahl (zB statt "8" sucht er nun nach "acht")
@@ -122,8 +115,6 @@ def answerA():
     prozentualeUebereinstimmungA = round(prozentualeUebereinstimmungA / len(Asplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungA = (prozentualeUebereinstimmungA * 0.8) + ergebnisAnzahlA #DEBUG / TEST
     wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
-    #REAC print (f'\nErgebnisse: {ergebnisAnzahlA}') #A
-    #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungA}') #A
     return exakteTreffer_ListA;
 
 # ---
@@ -182,7 +173,6 @@ def answerB():
               ratioProzentB = 0
         prozentualeUebereinstimmungB += ratioProzentB
         zsmgAntwortB += difflib.get_close_matches(x, ergebnisliste, 1) # Setze Wörter von B zusammen
-        #print (f'{b}\n')
         nAD = nummernAusgeschriebenDictionary.get(x) #
         if nAD: #wenn nummernAusgeschriebenDictionary.get(x) existiert
             numericAusgeschrieben = difflib.get_close_matches(nAD, ergebnisliste, 6) #ähnliche ergebnisse zu der ausgeschriebenen Zahl (zB statt "8" sucht er nun nach "acht")
@@ -202,8 +192,6 @@ def answerC():
     ungefaehreTreffer_ListC = []
 
     Csplit = AntwortCText.split() # splitte antwort C
-
-    #if AntwortCText in r.text: #Suche nach exakter Antwort und prüfe auf Treffer (if "Die Alten Ägypter" in list)
 
     zsmgAntwortC = ['zsmgAntwortC: '] #zusammengesetzteAntwort C
     mostcommonC = [] #mostCommon C
@@ -260,8 +248,6 @@ def answerC():
     prozentualeUebereinstimmungC = round(prozentualeUebereinstimmungC / len(Csplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungC = (prozentualeUebereinstimmungC * 0.8) + ergebnisAnzahlC
     wahrscheinlichkeitenDictionary['C'] = prozentualeUebereinstimmungC
-
-    #REAC print (f'\n--------------------------------')
     return exakteTreffer_ListC;
 #
 
@@ -363,14 +349,12 @@ if debugResult == '1':
    print(AntwortBText)
    print(AntwortCText)
 
-#REAC print ('======== Answer A ========')
-
-# AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
+# get list of exact matches for A, B and C
 exakteTreffer_ListA = answerA()
 exakteTreffer_ListB = answerB()
 exakteTreffer_ListC = answerC()
 
+# get amount of exact matches for A, B and C
 exakteTreffer_A = len(exakteTreffer_ListA) 
 exakteTreffer_B = len(exakteTreffer_ListB) 
 exakteTreffer_C = len(exakteTreffer_ListC) 
