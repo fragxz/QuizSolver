@@ -74,18 +74,13 @@ def answerA():
     ratioProzentA = 0
     mratioA = 0
     ergebnisAnzahlA = 0 #Addiert ALLE Ergebnisse die gefunden wurden zusammen (zB "Die Alten Ägypter" - 3x Die 10x Alten 15x Ägypten = 28 Ergebnisse die übereinstimmen)
+
     # EXAKTE Treffer -----------------------------------
     if AntwortAText in cleanedResult:
        #exakteTreffer_A = cleanedResult.count(AntwortAText)
        for x in ergebnisliste:
           if x == AntwortAText:
              exakteTreffer_ListA.append(x)
-
-    #.lower()
-
-    #testA = sum(1 for match in re.finditer(r"\b{}\b", contents))
-
-    #print(cleanedResult)
     # ----------------------------------- EXAKTE Treffer
 
     for x in Asplit: #iteriere über das Array Asplit (gesplittete Antwort) (zB for Die.... | for Alten.... | for Ägypter...)
@@ -196,8 +191,6 @@ def answerB():
     prozentualeUebereinstimmungB = round(prozentualeUebereinstimmungB / len(Bsplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungB = (prozentualeUebereinstimmungB * 0.8) + ergebnisAnzahlB
     wahrscheinlichkeitenDictionary['B'] = prozentualeUebereinstimmungB
-    #REAC print (f'\nErgebnisse: {ergebnisAnzahlB}') #B
-    #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungB}') #B
     return exakteTreffer_ListB;
 
 # -------
@@ -267,8 +260,6 @@ def answerC():
     prozentualeUebereinstimmungC = round(prozentualeUebereinstimmungC / len(Csplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungC = (prozentualeUebereinstimmungC * 0.8) + ergebnisAnzahlC
     wahrscheinlichkeitenDictionary['C'] = prozentualeUebereinstimmungC
-    #REAC print (f'\nErgebnisse: {ergebnisAnzahlC}') #C
-    #REAC print (f'Wahrscheinlichkeit: {prozentualeUebereinstimmungC}') #C
 
     #REAC print (f'\n--------------------------------')
     return exakteTreffer_ListC;
