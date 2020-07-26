@@ -55,12 +55,6 @@ mratioDifferenceFloat = 0.6 #float-value to define the ratio of likeness between
 # for example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is a very unrealistic case. especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
 # a good value in my tests were 0.6 - 0.7
 
-
-
-
-
-
-
 #NAD = nummernAusgeschriebenDictionary
 #a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
 nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","4":"vier","5":"fünf","6":"sechs","7":"sieben","8":"acht","9":"neun","10":"zehn","11":"elf","12":"zwölf","13":"dreizehn","14":"vierzehn","15":"fünfzehn","16":"sechszehn","17":"siebzehn","18":"achtzehn","19":"neunzehn","20":"zwangzig"}
@@ -206,7 +200,7 @@ for x in wahrscheinlichkeitenDictionary:
 #else: #Wenn es keine Wahrscheinlichkeiten gibt (alle == 0)
    #print (f'\nALLE WAHRSCHEINLICHKEITEN SIND 0%')
 
-# Öffne Webbrowser als TAB: die Antwortmöglichkeiten und die Frage
+# open a browser tab: question and answer (if uncommented)
 #webbrowser.open(urlA,new);
 #webbrowser.open(urlB,new);
 #webbrowser.open(urlC,new);
@@ -215,6 +209,3 @@ webbrowser.open(urlF,new);
 if zeitmessungAktiv == 1:
    end = time.time()
    print(end - start)
-
-
-
