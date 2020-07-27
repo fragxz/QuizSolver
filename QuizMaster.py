@@ -187,6 +187,13 @@ if "nicht" in FrageText: #Abfrage ob Frage negiert wird
 if "kein" in FrageText: #Abfrage ob Frage negiert wird
    print ('\nACHTUNG: Das Wort "kein" wurde gefunden - GGF JOKER VERWENDEN')
 
+if "no" in FrageText: #Condition: Question was negated
+   print ('\nWARNING: The Question contains the Word "no" - Result may be irritating ')
+
+if "not" in FrageText: #Condition: Question was negated
+   print ('\nWARNING: The Question contains the Word "not" - Result may be irritating ')
+   
+
 AntwortenWahrscheinlichkeitSortiert = sorted(wahrscheinlichkeitenDictionary, key=wahrscheinlichkeitenDictionary.get, reverse=True) #sortiert die Wahrscheinlichkeiten der Antworten absteigend; ex: "90, 80, 60"
 AntwortenWahrscheinlichkeitAlleWerteEntsprechenNull = True 
 for x in wahrscheinlichkeitenDictionary:
