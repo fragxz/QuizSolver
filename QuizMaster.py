@@ -27,6 +27,8 @@ currentWorkingDir = pathlib.Path().absolute()
 
 import re #regex
 
+# F U N C T I O N S ------------------------------------------------------------
+
 #function cleanhtml - erases html tags from the result
 def cleanhtml(raw_html):
   cleanr = re.compile('<.*?>')
@@ -49,7 +51,10 @@ if devmode != '1': #only creates a screenshot if devmode = false
    im = Image.open(userpath + "\\cash.png")
 else:
    print ('DEVMODE ---- DEVMODE')
-#initialize variables
+
+
+# initialize V A R I A B L E S -------------------------------------------------
+   
 wahrscheinlichkeitenDictionary = {}
 mratioDifferenceFloat = 0.6 #float-value to define the ratio of likeness between the "real answer" and the found results by the script.
 # for example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is a very unrealistic case. especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
