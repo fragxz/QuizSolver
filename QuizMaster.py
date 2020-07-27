@@ -22,6 +22,16 @@ import string
 import pathlib
 import os.path
 import AnswerFunctions
+import configparser
+config = configparser.ConfigParser()
+
+config.read('config.ini')
+
+#print(config.sections())
+
+print(config['CONFIG']['debug'])
+
+
 
 currentWorkingDir = pathlib.Path().absolute()
 
