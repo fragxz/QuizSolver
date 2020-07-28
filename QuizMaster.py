@@ -29,7 +29,7 @@ config.read('config.ini')
 
 #print(config.sections())
 
-print(config['CONFIG']['debug'])
+configDebug = config['CONFIG']['debug']
 
 
 
