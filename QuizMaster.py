@@ -29,7 +29,8 @@ config.read('config.ini')
 
 #print(config.sections())
 
-configDebug = config['CONFIG']['debug']
+devmode = config['CONFIG']['devmode'] #dev mode uses the "example.png"-file or any ohter file that you configured
+debugResult = config['CONFIG']['logging'] #If debugResult = 1 > enables debugging of the result
 
 
 
@@ -46,8 +47,6 @@ def cleanhtml(raw_html):
   return cleantext
 
 snapshot = PIL.ImageGrab.grab() #used to create a screenshot
-devmode = '1' #dev mode uses the "example.png"-file or any ohter file that you configured
-debugResult = '0' #If debugResult = 1 > enables debugging of the result
 
 ImageSubdirectory = "Images"
 
