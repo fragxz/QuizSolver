@@ -303,10 +303,11 @@ for x in wahrscheinlichkeitenDictionary:
    #print (f'\nALLE WAHRSCHEINLICHKEITEN SIND 0%')
 
 # open a browser tab: question and answer (if uncommented)
+# for debugging purposes or if you want to take a look at the search results by yourself!
 #webbrowser.open(urlA,new);
 #webbrowser.open(urlB,new);
 #webbrowser.open(urlC,new);
-webbrowser.open(urlF,new);
+#webbrowser.open(urlF,new);
 
 if zeitmessungAktiv == 1:
    end = time.time()
