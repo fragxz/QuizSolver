@@ -251,13 +251,13 @@ if exakteTreffer_C>0:
 
 if ((exakteTreffer_A == 0) and (exakteTreffer_B == 0) and (exakteTreffer_C == 0)):
    if ungefaehreTreffer_A>0:
-      print ('\n A - ungefaher | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
+      print ('\n A - ungefähr | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
 
    if ungefaehreTreffer_B>0:
-      print ('\n B - ungefaher | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
+      print ('\n B - ungefähr | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
 
    if ungefaehreTreffer_C>0:
-      print ('\n C - ungefaher | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
+      print ('\n C - ungefähr | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
       
 
 if "nicht" in FrageText: #Abfrage ob Frage negiert wird
