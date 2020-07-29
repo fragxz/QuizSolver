@@ -10,7 +10,10 @@ if zeitmessungAktiv == 1:
    import time
    start = time.time()
 
-import pyperclip #used to save Var result into clipboard
+
+# import third party modules
+
+import pyperclip #usedto save Var result into clipboard
 import pytesseract
 import webbrowser
 import PIL.ImageGrab
@@ -21,21 +24,23 @@ import difflib
 import string
 import pathlib
 import os.path
-import AnswerFunctions
+import re #regex
+
 import configparser
 config = configparser.ConfigParser()
-
 config.read('config.ini')
 
-#print(config.sections())
-
+# initialize Config Vars
 devmode = config['CONFIG']['devmode'] #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = config['CONFIG']['logging'] #If debugResult = 1 > enables debugging of the result
 ImageSubdirectory = config['CONFIG']['ImageSubdirectory'] # subdirectory where the single images for the question and the answers will be saved
 
 currentWorkingDir = pathlib.Path().absolute()
 
-import re #regex
+
+# import own modules
+import AnswerFunctions
+
 
 # F U N C T I O N S ------------------------------------------------------------
 
@@ -50,7 +55,7 @@ snapshot = PIL.ImageGrab.grab() #used to create a screenshot
 
 userpath = os.path.join(currentWorkingDir, ImageSubdirectory)
 
-im = Image.open(userpath + "\\example.png") #only used in DEV mode
+im = Image.open(userpath + "\\devmode-testfile.png") #only used in DEV mode
 
 if devmode != '1': #only creates a screenshot if devmode = false
    save_path = userpath + "\\cash.png"
