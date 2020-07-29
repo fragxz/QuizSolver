@@ -31,8 +31,7 @@ config.read('config.ini')
 
 devmode = config['CONFIG']['devmode'] #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = config['CONFIG']['logging'] #If debugResult = 1 > enables debugging of the result
-
-
+ImageSubdirectory = config['CONFIG']['ImageSubdirectory'] # subdirectory where the single images for the question and the answers will be saved
 
 currentWorkingDir = pathlib.Path().absolute()
 
@@ -48,7 +47,6 @@ def cleanhtml(raw_html):
 
 snapshot = PIL.ImageGrab.grab() #used to create a screenshot
 
-ImageSubdirectory = "Images"
 
 userpath = os.path.join(currentWorkingDir, ImageSubdirectory)
 
