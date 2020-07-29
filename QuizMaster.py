@@ -201,16 +201,65 @@ def cleanHtmlResult():
 
    return cleanedResult;
 
+# printEvaluatedResult
+# prints the Result depending on the amount of matches (for exact and estimated matches)
+# the function will print additional notifications if the question is negated
+def printEvaluatedResult():
+   if exakteTreffer_A>0:
+      print (f'\n A - EXAKTE TREFFER | {AntwortAText}:  {exakteTreffer_A}x  ||  {exakteTreffer_ListA[:5]}')
+
+   if exakteTreffer_B>0:
+      print (f'\n B - EXAKTE TREFFER | {AntwortBText}:  {exakteTreffer_B}x  ||  {exakteTreffer_ListB[:5]}')
+      
+   if exakteTreffer_C>0:
+      print (f'\n C - EXAKTE TREFFER | {AntwortCText}:  {exakteTreffer_C}x  ||  {exakteTreffer_ListC[:5]}')
+
+
+   if ((exakteTreffer_A == 0) and (exakteTreffer_B == 0) and (exakteTreffer_C == 0)):
+      if ungefaehreTreffer_A>0:
+         print (f'\n A - ungefähr | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
+
+      if ungefaehreTreffer_B>0:
+         print (f'\n B - ungefähr | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
+
+      if ungefaehreTreffer_C>0:
+         print (f'\n C - ungefähr | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
+         
+
+   if "nicht" in FrageText: #Abfrage ob Frage negiert wird
+      print ('\nACHTUNG: Das Wort "nicht" wurde gefunden - GGF JOKER VERWENDEN')
+
+   if "kein" in FrageText: #Abfrage ob Frage negiert wird
+      print ('\nACHTUNG: Das Wort "kein" wurde gefunden - GGF JOKER VERWENDEN')
+
+   if "no" in FrageText: #Condition: Question was negated
+      print ('\nWARNING: The Question contains the Word "no" - Result may be irritating ')
+
+   if "not" in FrageText: #Condition: Question was negated
+      print ('\nWARNING: The Question contains the Word "not" - Result may be irritating ')
+   
+
+# SearchEngineUrls
+# defines the URLS for the AnswerA,B,C and the question
+def defineSearchEngineUrls():
+   urlA=google+AntwortAText;
+   urlB=google+AntwortBText;
+   urlC=google+AntwortCText;
+   urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse;
+   return urlA, urlB, urlC, urlF;
+
 
 # initialize V A R I A B L E S -------------------------------------------------
    
 wahrscheinlichkeitenDictionary = {}
 
-
 #NAD = nummernAusgeschriebenDictionary
 #a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
 nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","4":"vier","5":"fünf","6":"sechs","7":"sieben","8":"acht","9":"neun","10":"zehn","11":"elf","12":"zwölf","13":"dreizehn","14":"vierzehn","15":"fünfzehn","16":"sechszehn","17":"siebzehn","18":"achtzehn","19":"neunzehn","20":"zwangzig"} #todo english words
 
+new=2;
+google = "https://www.google.de/search?q="
+anzahlSuchergebnisse = '30'
 
 # C O R E   L O G I C  ---------------------------------------------------------
    
@@ -219,15 +268,7 @@ AntwortBText = getAnswerB()
 AntwortCText = getAnswerC()
 FrageText, FrageTextReduziert = getQuestion()
 
-#opens the browser with the detected text as a google-search query
-new=2;
-google = "https://www.google.de/search?q="
-anzahlSuchergebnisse = '30'
-
-urlA=google+AntwortAText;
-urlB=google+AntwortBText;
-urlC=google+AntwortCText;
-urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse;
+urlA, urlB, urlC, urlF = defineSearchEngineUrls()
 
 pyperclip.copy(FrageTextReduziert) #copies the question text into the clipboard
 
@@ -254,54 +295,8 @@ exakteTreffer_A = len(exakteTreffer_ListA)
 exakteTreffer_B = len(exakteTreffer_ListB) 
 exakteTreffer_C = len(exakteTreffer_ListC) 
 
+printEvaluatedResult()
 
-if exakteTreffer_A>0:
-   print (f'\n A - EXAKTE TREFFER | {AntwortAText}:  {exakteTreffer_A}x  ||  {exakteTreffer_ListA[:5]}')
-
-if exakteTreffer_B>0:
-   print (f'\n B - EXAKTE TREFFER | {AntwortBText}:  {exakteTreffer_B}x  ||  {exakteTreffer_ListB[:5]}')
-   
-if exakteTreffer_C>0:
-   print (f'\n C - EXAKTE TREFFER | {AntwortCText}:  {exakteTreffer_C}x  ||  {exakteTreffer_ListC[:5]}')
-
-
-if ((exakteTreffer_A == 0) and (exakteTreffer_B == 0) and (exakteTreffer_C == 0)):
-   if ungefaehreTreffer_A>0:
-      print (f'\n A - ungefähr | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
-
-   if ungefaehreTreffer_B>0:
-      print (f'\n B - ungefähr | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
-
-   if ungefaehreTreffer_C>0:
-      print (f'\n C - ungefähr | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
-      
-
-if "nicht" in FrageText: #Abfrage ob Frage negiert wird
-   print ('\nACHTUNG: Das Wort "nicht" wurde gefunden - GGF JOKER VERWENDEN')
-
-if "kein" in FrageText: #Abfrage ob Frage negiert wird
-   print ('\nACHTUNG: Das Wort "kein" wurde gefunden - GGF JOKER VERWENDEN')
-
-if "no" in FrageText: #Condition: Question was negated
-   print ('\nWARNING: The Question contains the Word "no" - Result may be irritating ')
-
-if "not" in FrageText: #Condition: Question was negated
-   print ('\nWARNING: The Question contains the Word "not" - Result may be irritating ')
-   
-
-# todo - unteren bereich löschen? war wohl mal dafür da um es via Wahrscheinlichkeiten auszuwerten
-AntwortenWahrscheinlichkeitSortiert = sorted(wahrscheinlichkeitenDictionary, key=wahrscheinlichkeitenDictionary.get, reverse=True) #sortiert die Wahrscheinlichkeiten der Antworten absteigend; ex: "90, 80, 60"
-AntwortenWahrscheinlichkeitAlleWerteEntsprechenNull = True 
-for x in wahrscheinlichkeitenDictionary:
-   if wahrscheinlichkeitenDictionary[x] != 0.0:
-      AntwortenWahrscheinlichkeitAlleWerteEntsprechenNull = False
-
-#LÖSCHEN?
-#if AntwortenWahrscheinlichkeitAlleWerteEntsprechenNull == False: #Wenn es Wahrscheinlichkeiten gibt
-   #debug = 1
-   #print (f'\nHöchste Wahrscheinlichkeit: {AntwortenWahrscheinlichkeitSortiert}')
-#else: #Wenn es keine Wahrscheinlichkeiten gibt (alle == 0)
-   #print (f'\nALLE WAHRSCHEINLICHKEITEN SIND 0%')
 
 # open a browser tab: question and answer (if uncommented)
 # for debugging purposes or if you want to take a look at the search results by yourself!
