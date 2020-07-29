@@ -38,6 +38,26 @@ mratioDifferenceFloat = float( config['CONFIG']['mratioDifferenceFloat'] ); #flo
 # for example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is a very unrealistic case. especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
 # a good value in my tests were 0.6 - 0.7
 
+Question_UpperLeftCornerX = int ( config['LAYOUT']['Question_UpperLeftCornerX'] )
+Question_UpperLeftCornerY = int ( config['LAYOUT']['Question_UpperLeftCornerY'] )
+Question_LowerRightCornerX = int ( config['LAYOUT']['Question_LowerRightCornerX'] )
+Question_LowerRightCornerY = int ( config['LAYOUT']['Question_LowerRightCornerY'] )
+
+AnswerA_UpperLeftCornerX = int ( config['LAYOUT']['AnswerA_UpperLeftCornerX'] )
+AnswerA_UpperLeftCornerY = int ( config['LAYOUT']['AnswerA_UpperLeftCornerY'] )
+AnswerA_LowerRightCornerX = int ( config['LAYOUT']['AnswerA_LowerRightCornerX'] )
+AnswerA_LowerRightCornerY = int ( config['LAYOUT']['AnswerA_LowerRightCornerY'] )
+
+AnswerB_UpperLeftCornerX = int ( config['LAYOUT']['AnswerB_UpperLeftCornerX'] )
+AnswerB_UpperLeftCornerY = int ( config['LAYOUT']['AnswerB_UpperLeftCornerY'] )
+AnswerB_LowerRightCornerX = int ( config['LAYOUT']['AnswerB_LowerRightCornerX'] )
+AnswerB_LowerRightCornerY = int ( config['LAYOUT']['AnswerB_LowerRightCornerY'] )
+
+AnswerC_UpperLeftCornerX = int ( config['LAYOUT']['AnswerC_UpperLeftCornerX'] )
+AnswerC_UpperLeftCornerY = int ( config['LAYOUT']['AnswerC_UpperLeftCornerY'] )
+AnswerC_LowerRightCornerX = int ( config['LAYOUT']['AnswerC_LowerRightCornerX'] )
+AnswerC_LowerRightCornerY = int ( config['LAYOUT']['AnswerC_LowerRightCornerY'] )
+
 
 currentWorkingDir = pathlib.Path().absolute()
 
@@ -78,7 +98,7 @@ wahrscheinlichkeitenDictionary = {}
 #a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
 nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","4":"vier","5":"fünf","6":"sechs","7":"sieben","8":"acht","9":"neun","10":"zehn","11":"elf","12":"zwölf","13":"dreizehn","14":"vierzehn","15":"fünfzehn","16":"sechszehn","17":"siebzehn","18":"achtzehn","19":"neunzehn","20":"zwangzig"}
 
-DefiniereBereich_AntwortA = (834, 592, 1423, 682) #defines the area of Answer A
+DefiniereBereich_AntwortA = (AnswerA_UpperLeftCornerX, AnswerA_UpperLeftCornerY, AnswerA_LowerRightCornerX, AnswerA_LowerRightCornerY) #defines the area of Answer A
 QuizmasterAntwortAArea = im.crop(DefiniereBereich_AntwortA) #slices the screenshot into the defined area for the answer A
 AntwortA_SavePath = userpath + "\\cs_antworta.png"
 QuizmasterAntwortAArea.save(AntwortA_SavePath)
