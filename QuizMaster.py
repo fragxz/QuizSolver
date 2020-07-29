@@ -161,13 +161,18 @@ def getQuestion():
    FrageTextReduziert = FrageTextReduziert.replace("?", "") #removes the Questionmark (?) from the question text
    return FrageText, FrageTextReduziert;
 
+# getResultViaRequest()
+# starts a request to a search engine with the content of the question (urlF)
+# returns the complete HTML Result body as resultText
+def getResultViaRequest():
+   r = requests.get(urlF) #get question URL
+   resultText = r.text
+   return resultText;
+
 # cleanHtmlResult
-
-# 
-
+# cleans the HTML Result by removing unnecessary things, such as:
+# html head, html tags, script tags, style tags, punctuation, google header
 def cleanHtmlResult():
-
-
    #removes the Html head -> only the body-content remains
    resultbodyCut = resultText.split('</head>') #remove the head content
    resultbody = resultbodyCut[1] #only contains the HTML content from <body> until the end
@@ -226,11 +231,7 @@ urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse;
 
 pyperclip.copy(FrageTextReduziert) #copies the question text into the clipboard
 
-
-#get Result (complete HTML Result) via Request 
-r = requests.get(urlF) #get question URL
-resultText = r.text
-
+resultText = getResultViaRequest()
 cleanedResult = cleanHtmlResult()
 
 ergebnisliste = cleanedResult.split() #splits multiple results into a word-list
