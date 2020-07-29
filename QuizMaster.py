@@ -140,6 +140,26 @@ def getAnswerC():
       AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu",config='--psm 6')
    return AntwortCText;
 
+# getQuestion
+
+# defines the area for the question (X and Y rectangle coordinates)
+# crops the area
+# saves the cropped area as an image
+# gets the text from the image via pytesseract (OCR)
+# removes linking words from the question to improve the result accuracy
+# returns the question
+def getQuestion():
+   DefiniereBereich_Frage = (Question_UpperLeftCornerX, Question_UpperLeftCornerY, Question_LowerRightCornerX, Question_LowerRightCornerY) #defines the question-area
+   QuizmasterArea_Frage = im.crop(DefiniereBereich_Frage) #slices the screenshot into the defined area for the question
+   Frage_SavePath = userpath + "\\cs_frage.png" #speicherort und name für die Frage
+   QuizmasterArea_Frage.save(Frage_SavePath) #Befehl zum Speichern der Datei
+   FrageText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),lang="deu") #command that converts the image into strings (it opens the image (that is located at the specified path), language packs / trained data for pytesseract))
+   FrageText = FrageText.replace('\n', ' ') # replaces the line break (\n) with a space for an optimized search
+   FrageTextReduziert = FrageText.lower() #sets all text content to lowercase characters
+   zuEntfernendeWoerter = ['lautet','mit','den','eines','an','dem','auch','...?','wie','gibt','es','folgend','folgende','folgendes','folgenden','war','was','versteht','verstehen','man','unter','stehen','viele','bietet','eine','einen','ein','aus','auf','in','von','welcher','welches','welchen','welchem','der','die','das','des','dessen','kennt','man','wer','wie','was','wessen','ist','hat','fand','noch','nie','statt','erhielt','für','seine','seinen','ihre','ihren','zu','genau','?','..','...','heißt','hieß','heisst','heissen','heißen','geht','ging','gehen','zurück','und','einst','brachen','gerne','sieht','sehen'] #todo configurable? english? language-wise?
+   FrageTextReduziert = ' '.join(i for i in FrageTextReduziert.split() if i not in zuEntfernendeWoerter)
+   FrageTextReduziert = FrageTextReduziert.replace("?", "") #removes the Questionmark (?) from the question text
+   return FrageText, FrageTextReduziert;
 
 
 # initialize V A R I A B L E S -------------------------------------------------
@@ -157,19 +177,7 @@ nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","
 AntwortAText = getAnswerA()
 AntwortBText = getAnswerB()
 AntwortCText = getAnswerC()
-
-DefiniereBereich_Frage = (Question_UpperLeftCornerX, Question_UpperLeftCornerY, Question_LowerRightCornerX, Question_LowerRightCornerY) #defines the question-area
-QuizmasterArea_Frage = im.crop(DefiniereBereich_Frage) #slices the screenshot into the defined area for the question
-Frage_SavePath = userpath + "\\cs_frage.png" #speicherort und name für die Frage
-QuizmasterArea_Frage.save(Frage_SavePath) #Befehl zum Speichern der Datei
-FrageText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),lang="deu") #command that converts the image into strings (it opens the image (that is located at the specified path), language packs / trained data for pytesseract))
-FrageText = FrageText.replace('\n', ' ') # replaces the line break (\n) with a space for an optimized search
-
-FrageTextReduziert = FrageText.lower() #sets all text content to lowercase characters
-zuEntfernendeWoerter = ['lautet','mit','den','eines','an','dem','auch','...?','wie','gibt','es','folgend','folgende','folgendes','folgenden','war','was','versteht','verstehen','man','unter','stehen','viele','bietet','eine','einen','ein','aus','auf','in','von','welcher','welches','welchen','welchem','der','die','das','des','dessen','kennt','man','wer','wie','was','wessen','ist','hat','fand','noch','nie','statt','erhielt','für','seine','seinen','ihre','ihren','zu','genau','?','..','...','heißt','hieß','heisst','heissen','heißen','geht','ging','gehen','zurück','und','einst','brachen','gerne','sieht','sehen']
-FrageTextReduziert = ' '.join(i for i in FrageTextReduziert.split() if i not in zuEntfernendeWoerter)
-FrageTextReduziert = FrageTextReduziert.replace("?", "") #removes the Questionmark (?) from the question text
-
+FrageText, FrageTextReduziert = getQuestion()
 
 #opens the browser with the detected text as a google-search query
 new=2;
