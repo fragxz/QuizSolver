@@ -245,9 +245,9 @@ if debugResult == '1':
    print(AntwortCText)
 
 # get list of exact matches for A, B and C
-exakteTreffer_ListA, ungefaehreTreffer_A = AnswerFunctions.answerA(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
-exakteTreffer_ListB, ungefaehreTreffer_B = AnswerFunctions.answerB(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
-exakteTreffer_ListC, ungefaehreTreffer_C = AnswerFunctions.answerC(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
+exakteTreffer_ListA, ungefaehreTreffer_A, Asplit, ungefaehreTreffer_ListA = AnswerFunctions.answerA(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
+exakteTreffer_ListB, ungefaehreTreffer_B, Bsplit, ungefaehreTreffer_ListB = AnswerFunctions.answerB(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
+exakteTreffer_ListC, ungefaehreTreffer_C, Csplit, ungefaehreTreffer_ListC = AnswerFunctions.answerC(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
 
 # get amount of exact matches for A, B and C
 exakteTreffer_A = len(exakteTreffer_ListA) 
@@ -256,24 +256,24 @@ exakteTreffer_C = len(exakteTreffer_ListC)
 
 
 if exakteTreffer_A>0:
-   print ('\n A - EXAKTE TREFFER | {AntwortAText}:  {exakteTreffer_A}x  ||  {exakteTreffer_ListA[:5]}')
+   print (f'\n A - EXAKTE TREFFER | {AntwortAText}:  {exakteTreffer_A}x  ||  {exakteTreffer_ListA[:5]}')
 
 if exakteTreffer_B>0:
-   print ('\n B - EXAKTE TREFFER | {AntwortBText}:  {exakteTreffer_B}x  ||  {exakteTreffer_ListB[:5]}')
+   print (f'\n B - EXAKTE TREFFER | {AntwortBText}:  {exakteTreffer_B}x  ||  {exakteTreffer_ListB[:5]}')
    
 if exakteTreffer_C>0:
-   print ('\n C - EXAKTE TREFFER | {AntwortCText}:  {exakteTreffer_C}x  ||  {exakteTreffer_ListC[:5]}')
+   print (f'\n C - EXAKTE TREFFER | {AntwortCText}:  {exakteTreffer_C}x  ||  {exakteTreffer_ListC[:5]}')
 
 
 if ((exakteTreffer_A == 0) and (exakteTreffer_B == 0) and (exakteTreffer_C == 0)):
    if ungefaehreTreffer_A>0:
-      print ('\n A - ungefähr | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
+      print (f'\n A - ungefähr | {Asplit}:  {ungefaehreTreffer_A}x  ||  {ungefaehreTreffer_ListA[:5]}')
 
    if ungefaehreTreffer_B>0:
-      print ('\n B - ungefähr | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
+      print (f'\n B - ungefähr | {Bsplit}:  {ungefaehreTreffer_B}x  ||  {ungefaehreTreffer_ListB[:5]}')
 
    if ungefaehreTreffer_C>0:
-      print ('\n C - ungefähr | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
+      print (f'\n C - ungefähr | {Csplit}:  {ungefaehreTreffer_C}x  ||  {ungefaehreTreffer_ListC[:5]}')
       
 
 if "nicht" in FrageText: #Abfrage ob Frage negiert wird

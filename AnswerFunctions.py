@@ -59,7 +59,7 @@ def answerA(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnislis
     prozentualeUebereinstimmungA = round(prozentualeUebereinstimmungA / len(Asplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungA = (prozentualeUebereinstimmungA * 0.8) + ergebnisAnzahlA #DEBUG / TEST
     wahrscheinlichkeitenDictionary['A'] = prozentualeUebereinstimmungA
-    return exakteTreffer_ListA, ungefaehreTreffer_A;
+    return exakteTreffer_ListA, ungefaehreTreffer_A, Asplit, ungefaehreTreffer_ListA;
 
 
 # --------------
@@ -127,7 +127,7 @@ def answerB(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnislis
     prozentualeUebereinstimmungB = round(prozentualeUebereinstimmungB / len(Bsplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungB = (prozentualeUebereinstimmungB * 0.8) + ergebnisAnzahlB
     wahrscheinlichkeitenDictionary['B'] = prozentualeUebereinstimmungB
-    return exakteTreffer_ListB, ungefaehreTreffer_B;
+    return exakteTreffer_ListB, ungefaehreTreffer_B, Bsplit, ungefaehreTreffer_ListB;
 
 # -------
 
@@ -194,6 +194,6 @@ def answerC(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnislis
     prozentualeUebereinstimmungC = round(prozentualeUebereinstimmungC / len(Csplit),2) #berechne durchschnittliche Wahrscheinlichkeit in Abhängigkeit zu den vorhandenen Wörtern (Asplit)
     prozentualeUebereinstimmungC = (prozentualeUebereinstimmungC * 0.8) + ergebnisAnzahlC
     wahrscheinlichkeitenDictionary['C'] = prozentualeUebereinstimmungC
-    return exakteTreffer_ListC, ungefaehreTreffer_C;
+    return exakteTreffer_ListC, ungefaehreTreffer_C, Csplit, ungefaehreTreffer_ListC;
 #
 
