@@ -164,9 +164,9 @@ if debugResult == '1':
    print(AntwortCText)
 
 # get list of exact matches for A, B and C
-exakteTreffer_ListA = AnswerFunctions.answerA(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
-exakteTreffer_ListB = AnswerFunctions.answerB(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
-exakteTreffer_ListC = AnswerFunctions.answerC(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
+exakteTreffer_ListA, ungefaehreTreffer_A = AnswerFunctions.answerA(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
+exakteTreffer_ListB, ungefaehreTreffer_B = AnswerFunctions.answerB(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
+exakteTreffer_ListC, ungefaehreTreffer_C = AnswerFunctions.answerC(AntwortAText, AntwortBText, AntwortCText, cleanedResult, ergebnisliste, mratioDifferenceFloat, nummernAusgeschriebenDictionary, wahrscheinlichkeitenDictionary)
 
 # get amount of exact matches for A, B and C
 exakteTreffer_A = len(exakteTreffer_ListA) 
