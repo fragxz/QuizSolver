@@ -89,6 +89,59 @@ else:
    print ('DEVMODE ---- DEVMODE')
 
 
+# getAnswerA
+
+# defines the area for the answer (X and Y rectangle coordinates)
+# crops the area
+# saves the cropped area as an image
+# gets the text from the image via pytesseract (OCR)
+# returns the text
+def getAnswerA():
+   DefiniereBereich_AntwortA = (AnswerA_UpperLeftCornerX, AnswerA_UpperLeftCornerY, AnswerA_LowerRightCornerX, AnswerA_LowerRightCornerY) #defines the area of Answer A
+   QuizmasterAntwortAArea = im.crop(DefiniereBereich_AntwortA) #slices the screenshot into the defined area for the answer A
+   AntwortA_SavePath = userpath + "\\cs_antworta.png"
+   QuizmasterAntwortAArea.save(AntwortA_SavePath)
+   AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu") #config='-psm 5'
+   if not AntwortAText: #If AntwortAText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
+      AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu",config='--psm 6')
+   return AntwortAText;
+
+# getAnswerB
+
+# defines the area for the answer (X and Y rectangle coordinates)
+# crops the area
+# saves the cropped area as an image
+# gets the text from the image via pytesseract (OCR)
+# returns the text
+def getAnswerB():    
+   DefiniereBereich_AntwortB = (AnswerB_UpperLeftCornerX, AnswerB_UpperLeftCornerY, AnswerB_LowerRightCornerX, AnswerB_LowerRightCornerY) #defines the area of Answer B
+   QuizmasterAntwortBArea = im.crop(DefiniereBereich_AntwortB) #slices the screenshot into the defined area for the answer B
+   AntwortB_SavePath = userpath + "\\cs_antwortb.png"
+   QuizmasterAntwortBArea.save(AntwortB_SavePath)
+   AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu")
+   if not AntwortBText: #If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
+      AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu",config='--psm 6')
+   return AntwortBText;
+
+# getAnswerC
+
+# defines the area for the answer (X and Y rectangle coordinates)
+# crops the area
+# saves the cropped area as an image
+# gets the text from the image via pytesseract (OCR)
+# returns the text
+def getAnswerC():
+   DefiniereBereich_AntwortC = (AnswerC_UpperLeftCornerX, AnswerC_UpperLeftCornerY, AnswerC_LowerRightCornerX, AnswerC_LowerRightCornerY) #defines the area of Answer C
+   QuizmasterAntwortCArea = im.crop(DefiniereBereich_AntwortC) #slices the screenshot into the defined area for the answer C
+   AntwortC_SavePath = userpath + "\\cs_antwortc.png"
+   QuizmasterAntwortCArea.save(AntwortC_SavePath)
+   AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu")
+   if not AntwortCText: #If AntwortCText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
+      AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu",config='--psm 6')
+   return AntwortCText;
+
+
+
 # initialize V A R I A B L E S -------------------------------------------------
    
 wahrscheinlichkeitenDictionary = {}
@@ -98,29 +151,16 @@ wahrscheinlichkeitenDictionary = {}
 #a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
 nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","4":"vier","5":"fünf","6":"sechs","7":"sieben","8":"acht","9":"neun","10":"zehn","11":"elf","12":"zwölf","13":"dreizehn","14":"vierzehn","15":"fünfzehn","16":"sechszehn","17":"siebzehn","18":"achtzehn","19":"neunzehn","20":"zwangzig"}
 
-DefiniereBereich_AntwortA = (AnswerA_UpperLeftCornerX, AnswerA_UpperLeftCornerY, AnswerA_LowerRightCornerX, AnswerA_LowerRightCornerY) #defines the area of Answer A
-QuizmasterAntwortAArea = im.crop(DefiniereBereich_AntwortA) #slices the screenshot into the defined area for the answer A
-AntwortA_SavePath = userpath + "\\cs_antworta.png"
-QuizmasterAntwortAArea.save(AntwortA_SavePath)
-AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu") #config='-psm 5'
-if not AntwortAText: #If AntwortAText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
-   AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu",config='--psm 6')
-    
-DefiniereBereich_AntwortB = (AnswerB_UpperLeftCornerX, AnswerB_UpperLeftCornerY, AnswerB_LowerRightCornerX, AnswerB_LowerRightCornerY) #defines the area of Answer B
-QuizmasterAntwortBArea = im.crop(DefiniereBereich_AntwortB) #slices the screenshot into the defined area for the answer B
-AntwortB_SavePath = userpath + "\\cs_antwortb.png"
-QuizmasterAntwortBArea.save(AntwortB_SavePath)
-AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu")
-if not AntwortBText: #If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
-   AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu",config='--psm 6')
+AntwortAText = getAnswerA()
 
-DefiniereBereich_AntwortC = (AnswerC_UpperLeftCornerX, AnswerC_UpperLeftCornerY, AnswerC_LowerRightCornerX, AnswerC_LowerRightCornerY) #defines the area of Answer C
-QuizmasterAntwortCArea = im.crop(DefiniereBereich_AntwortC) #slices the screenshot into the defined area for the answer C
-AntwortC_SavePath = userpath + "\\cs_antwortc.png"
-QuizmasterAntwortCArea.save(AntwortC_SavePath)
-AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu")
-if not AntwortCText: #If AntwortCText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
-   AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu",config='--psm 6')
+
+
+
+AntwortBText = getAnswerB()
+
+
+
+AntwortCText = getAnswerC()
 
 DefiniereBereich_Frage = (Question_UpperLeftCornerX, Question_UpperLeftCornerY, Question_LowerRightCornerX, Question_LowerRightCornerY) #defines the question-area
 QuizmasterArea_Frage = im.crop(DefiniereBereich_Frage) #slices the screenshot into the defined area for the question
