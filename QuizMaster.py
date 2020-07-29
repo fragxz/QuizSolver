@@ -161,6 +161,41 @@ def getQuestion():
    FrageTextReduziert = FrageTextReduziert.replace("?", "") #removes the Questionmark (?) from the question text
    return FrageText, FrageTextReduziert;
 
+# cleanHtmlResult
+
+# 
+
+def cleanHtmlResult():
+
+
+   #removes the Html head -> only the body-content remains
+   resultbodyCut = resultText.split('</head>') #remove the head content
+   resultbody = resultbodyCut[1] #only contains the HTML content from <body> until the end
+
+   # REGEX -------------------------- 
+   regexStyle = r"<style\b[^>]*>(.*?)</style>" #regex <style> tags
+   regexScript = r"<script\b[^>]*>(.*?)</script>" #regex <script> tags
+   test_str = resultbody
+   subst = ""
+   regexedRemoveStyle = re.sub(regexStyle, subst, test_str, 0) #removes style content
+   regexedRemoveScript = re.sub(regexScript, subst, test_str, 0) #removes script content
+   # -------------------------- REGEX
+
+   # CLEAN HTML TAGS --------------------
+   htmlCleanedResult = cleanhtml(regexedRemoveScript)
+   # -------------------- CLEAN HTML TAGS 
+
+   # punctuation mark CLEARING --------------------
+   keineSatzzeichenResult = re.sub(r'[^\w\s]','',htmlCleanedResult)
+   # -------------------- punctuation mark CLEARING
+
+   # removes GOOGLE HEADER -------------
+   resultRemoveGoogleHeader = keineSatzzeichenResult.split('ErgebnisseWortwörtlichUngefähr') 
+   cleanedResult = resultRemoveGoogleHeader[0] 
+   # ------------- removes GOOGLE HEADER
+
+   return cleanedResult;
+
 
 # initialize V A R I A B L E S -------------------------------------------------
    
@@ -191,36 +226,12 @@ urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse;
 
 pyperclip.copy(FrageTextReduziert) #copies the question text into the clipboard
 
-#complete HTML result
+
+#get Result (complete HTML Result) via Request 
 r = requests.get(urlF) #get question URL
 resultText = r.text
 
-#removes the Html head -> only the body-content remains
-resultbodyCut = resultText.split('</head>') #remove the head content
-resultbody = resultbodyCut[1] #only contains the HTML content from <body> until the end
-
-# REGEX -------------------------- 
-regexStyle = r"<style\b[^>]*>(.*?)</style>" #regex <style> tags
-regexScript = r"<script\b[^>]*>(.*?)</script>" #regex <script> tags
-test_str = resultbody
-subst = ""
-regexedRemoveStyle = re.sub(regexStyle, subst, test_str, 0) #removes style content
-regexedRemoveScript = re.sub(regexScript, subst, test_str, 0) #removes script content
-# -------------------------- REGEX
-
-# CLEAN HTML TAGS --------------------
-htmlCleanedResult = cleanhtml(regexedRemoveScript)
-# -------------------- CLEAN HTML TAGS 
-
-# punctuation mark CLEARING --------------------
-keineSatzzeichenResult = re.sub(r'[^\w\s]','',htmlCleanedResult)
-# -------------------- punctuation mark CLEARING
-
-
-# removes GOOGLE HEADER -------------
-resultRemoveGoogleHeader = keineSatzzeichenResult.split('ErgebnisseWortwörtlichUngefähr') 
-cleanedResult = resultRemoveGoogleHeader[0] 
-# ------------- removes GOOGLE HEADER
+cleanedResult = cleanHtmlResult()
 
 ergebnisliste = cleanedResult.split() #splits multiple results into a word-list
 print (FrageText+'\n') #print the question
