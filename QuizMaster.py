@@ -106,7 +106,7 @@ AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="d
 if not AntwortAText: #If AntwortAText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
    AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu",config='--psm 6')
     
-DefiniereBereich_AntwortB = (834, 737, 1423, 824) #defines the area of Answer B
+DefiniereBereich_AntwortB = (AnswerB_UpperLeftCornerX, AnswerB_UpperLeftCornerY, AnswerB_LowerRightCornerX, AnswerB_LowerRightCornerY) #defines the area of Answer B
 QuizmasterAntwortBArea = im.crop(DefiniereBereich_AntwortB) #slices the screenshot into the defined area for the answer B
 AntwortB_SavePath = userpath + "\\cs_antwortb.png"
 QuizmasterAntwortBArea.save(AntwortB_SavePath)
@@ -114,7 +114,7 @@ AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="d
 if not AntwortBText: #If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
    AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu",config='--psm 6')
 
-DefiniereBereich_AntwortC = (834, 879, 1423, 969) #defines the area of Answer C
+DefiniereBereich_AntwortC = (AnswerC_UpperLeftCornerX, AnswerC_UpperLeftCornerY, AnswerC_LowerRightCornerX, AnswerC_LowerRightCornerY) #defines the area of Answer C
 QuizmasterAntwortCArea = im.crop(DefiniereBereich_AntwortC) #slices the screenshot into the defined area for the answer C
 AntwortC_SavePath = userpath + "\\cs_antwortc.png"
 QuizmasterAntwortCArea.save(AntwortC_SavePath)
@@ -122,7 +122,7 @@ AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="d
 if not AntwortCText: #If AntwortCText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
    AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu",config='--psm 6')
 
-DefiniereBereich_Frage = (789, 287, 1467, 495) #defines the question-area
+DefiniereBereich_Frage = (Question_UpperLeftCornerX, Question_UpperLeftCornerY, Question_LowerRightCornerX, Question_LowerRightCornerY) #defines the question-area
 QuizmasterArea_Frage = im.crop(DefiniereBereich_Frage) #slices the screenshot into the defined area for the question
 Frage_SavePath = userpath + "\\cs_frage.png" #speicherort und name für die Frage
 QuizmasterArea_Frage.save(Frage_SavePath) #Befehl zum Speichern der Datei
