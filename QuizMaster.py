@@ -30,10 +30,14 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-# initialize Config Vars
+# initialize Config Vars (you can configure these in via the config.ini)
 devmode = config['CONFIG']['devmode'] #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = config['CONFIG']['logging'] #If debugResult = 1 > enables debugging of the result
 ImageSubdirectory = config['CONFIG']['ImageSubdirectory'] # subdirectory where the single images for the question and the answers will be saved
+mratioDifferenceFloat = float( config['CONFIG']['mratioDifferenceFloat'] ); #float-value to define the ratio of likeness between the "real answer" and the found results by the script.
+# for example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is a very unrealistic case. especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
+# a good value in my tests were 0.6 - 0.7
+
 
 currentWorkingDir = pathlib.Path().absolute()
 
@@ -68,9 +72,7 @@ else:
 # initialize V A R I A B L E S -------------------------------------------------
    
 wahrscheinlichkeitenDictionary = {}
-mratioDifferenceFloat = 0.6 #float-value to define the ratio of likeness between the "real answer" and the found results by the script.
-# for example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is a very unrealistic case. especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
-# a good value in my tests were 0.6 - 0.7
+
 
 #NAD = nummernAusgeschriebenDictionary
 #a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
