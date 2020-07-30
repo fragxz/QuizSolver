@@ -34,7 +34,7 @@ config.read('config.ini')
 devmode = config['CONFIG']['devmode'] #dev mode uses the "example.png"-file or any ohter file that you configured
 debugResult = config['CONFIG']['logging'] #If debugResult = 1 > enables debugging of the result
 ImageSubdirectory = config['CONFIG']['ImageSubdirectory'] # subdirectory where the single images for the question and the answers will be saved
-mratioDifferenceFloat = float( config['CONFIG']['mratioDifferenceFloat'] ); #float-value to define the ratio of likeness between the "real answer" and the found results by the script.
+mratioDifferenceFloat = float( config['CONFIG']['mratioDifferenceFloat'] ) #float-value to define the ratio of likeness between the "real answer" and the found results by the script.
 # for example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is a very unrealistic case. especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
 # a good value in my tests were 0.6 - 0.7
 
@@ -104,7 +104,7 @@ def getAnswerA():
    AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu") #config='-psm 5'
    if not AntwortAText: #If AntwortAText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
       AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath),lang="deu",config='--psm 6')
-   return AntwortAText;
+   return AntwortAText
 
 # getAnswerB
 
@@ -121,7 +121,7 @@ def getAnswerB():
    AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu")
    if not AntwortBText: #If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
       AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath),lang="deu",config='--psm 6')
-   return AntwortBText;
+   return AntwortBText
 
 # getAnswerC
 
@@ -138,7 +138,7 @@ def getAnswerC():
    AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu")
    if not AntwortCText: #If AntwortCText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single 
       AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath),lang="deu",config='--psm 6')
-   return AntwortCText;
+   return AntwortCText
 
 # getQuestion
 
@@ -159,7 +159,7 @@ def getQuestion():
    zuEntfernendeWoerter = ['lautet','mit','den','eines','an','dem','auch','...?','wie','gibt','es','folgend','folgende','folgendes','folgenden','war','was','versteht','verstehen','man','unter','stehen','viele','bietet','eine','einen','ein','aus','auf','in','von','welcher','welches','welchen','welchem','der','die','das','des','dessen','kennt','man','wer','wie','was','wessen','ist','hat','fand','noch','nie','statt','erhielt','für','seine','seinen','ihre','ihren','zu','genau','?','..','...','heißt','hieß','heisst','heissen','heißen','geht','ging','gehen','zurück','und','einst','brachen','gerne','sieht','sehen'] #todo configurable? english? language-wise?
    FrageTextReduziert = ' '.join(i for i in FrageTextReduziert.split() if i not in zuEntfernendeWoerter)
    FrageTextReduziert = FrageTextReduziert.replace("?", "") #removes the Questionmark (?) from the question text
-   return FrageText, FrageTextReduziert;
+   return FrageText, FrageTextReduziert
 
 # getResultViaRequest()
 # starts a request to a search engine with the content of the question (urlF)
@@ -167,7 +167,7 @@ def getQuestion():
 def getResultViaRequest():
    r = requests.get(urlF) #get question URL
    resultText = r.text
-   return resultText;
+   return resultText
 
 # cleanHtmlResult
 # cleans the HTML Result by removing unnecessary things, such as:
@@ -199,7 +199,7 @@ def cleanHtmlResult():
    cleanedResult = resultRemoveGoogleHeader[0] 
    # ------------- removes GOOGLE HEADER
 
-   return cleanedResult;
+   return cleanedResult
 
 # printEvaluatedResult
 # prints the Result depending on the amount of matches (for exact and estimated matches)
@@ -242,11 +242,11 @@ def printEvaluatedResult():
 # SearchEngineUrls
 # defines the URLS for the AnswerA,B,C and the question
 def defineSearchEngineUrls():
-   urlA=google+AntwortAText;
-   urlB=google+AntwortBText;
-   urlC=google+AntwortCText;
-   urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse;
-   return urlA, urlB, urlC, urlF;
+   urlA=google+AntwortAText
+   urlB=google+AntwortBText
+   urlC=google+AntwortCText
+   urlF=google+FrageTextReduziert+'&num='+anzahlSuchergebnisse
+   return urlA, urlB, urlC, urlF
 
 
 # initialize V A R I A B L E S -------------------------------------------------
