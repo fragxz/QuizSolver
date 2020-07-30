@@ -155,17 +155,17 @@ def getAnswerC():
 # removes linking words from the question to improve the result accuracy
 # returns the question
 def getQuestion():
-    DefiniereBereich_Frage = (Question_UpperLeftCornerX, Question_UpperLeftCornerY, Question_LowerRightCornerX,
+    defineArea_question = (Question_UpperLeftCornerX, Question_UpperLeftCornerY, Question_LowerRightCornerX,
                               Question_LowerRightCornerY)  # defines the question-area
-    QuizmasterArea_Frage = im.crop(
-        DefiniereBereich_Frage)  # slices the screenshot into the defined area for the question
-    Frage_SavePath = userpath + "\\cs_frage.png"  # speicherort und name für die Frage
-    QuizmasterArea_Frage.save(Frage_SavePath)  # Befehl zum Speichern der Datei
-    FrageText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),
+    quizmasterArea_question = im.crop(
+        defineArea_question)  # slices the screenshot into the defined area for the question
+    question_savepath = userpath + "\\cs_frage.png"  # speicherort und name für die Frage
+    quizmasterArea_question.save(question_savepath)  # Befehl zum Speichern der Datei
+    questionText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),
                                             lang="deu")  # command that converts the image into strings (it opens the image (that is located at the specified path), language packs / trained data for pytesseract))
-    FrageText = FrageText.replace('\n', ' ')  # replaces the line break (\n) with a space for an optimized search
-    FrageTextReduziert = FrageText.lower()  # sets all text content to lowercase characters
-    zuEntfernendeWoerter = ['lautet', 'mit', 'den', 'eines', 'an', 'dem', 'auch', '...?', 'wie', 'gibt', 'es',
+    questionText = questionText.replace('\n', ' ')  # replaces the line break (\n) with a space for an optimized search
+    questionText_reduced = questionText.lower()  # sets all text content to lowercase characters
+    wordsToBeRemoved = ['lautet', 'mit', 'den', 'eines', 'an', 'dem', 'auch', '...?', 'wie', 'gibt', 'es',
                             'folgend', 'folgende', 'folgendes', 'folgenden', 'war', 'was', 'versteht', 'verstehen',
                             'man', 'unter', 'stehen', 'viele', 'bietet', 'eine', 'einen', 'ein', 'aus', 'auf', 'in',
                             'von', 'welcher', 'welches', 'welchen', 'welchem', 'der', 'die', 'das', 'des', 'dessen',
@@ -173,9 +173,9 @@ def getQuestion():
                             'erhielt', 'für', 'seine', 'seinen', 'ihre', 'ihren', 'zu', 'genau', '?', '..', '...',
                             'heißt', 'hieß', 'heisst', 'heissen', 'heißen', 'geht', 'ging', 'gehen', 'zurück', 'und',
                             'einst', 'brachen', 'gerne', 'sieht', 'sehen']  # todo configurable? english? language-wise?
-    FrageTextReduziert = ' '.join(i for i in FrageTextReduziert.split() if i not in zuEntfernendeWoerter)
-    FrageTextReduziert = FrageTextReduziert.replace("?", "")  # removes the Questionmark (?) from the question text
-    return FrageText, FrageTextReduziert
+    questionText_reduced = ' '.join(i for i in questionText_reduced.split() if i not in wordsToBeRemoved)
+    questionText_reduced = questionText_reduced.replace("?", "")  # removes the Questionmark (?) from the question text
+    return questionText, questionText_reduced
 
 
 # getResultViaRequest()
