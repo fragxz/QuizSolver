@@ -101,9 +101,9 @@ def getAnswerA():
         defineArea_AnswerA)  # slices the screenshot into the defined area for the answer A
     answerA_savePath = userpath + "\\cs_antworta.png"
     quizmaster_answerA_area.save(answerA_savePath)
-    answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu")  # config='-psm 5'
+    answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu")  # config='-psm 5' # todo make language configurable via config.ini
     if not answerA_text:  # If answerA_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
-        answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu", config='--psm 6')
+        answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu", config='--psm 6') # todo make language configurable via config.ini
     return answerA_text
 
 
@@ -120,9 +120,9 @@ def getAnswerB():
     quizmaster_answerB_area = im.crop(defineArea_AnswerB)  # slices the screenshot into the defined area for the answerB
     answerB_savepath = userpath + "\\cs_antwortb.png"
     quizmaster_answerB_area.save(answerB_savepath)
-    AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu")
+    AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu") # todo make language configurable via config.ini
     if not AnswerB_text:  # If AnswerB_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
-        AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu", config='--psm 6')
+        AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu", config='--psm 6') # todo make language configurable via config.ini
     return AnswerB_text
 
 
@@ -134,16 +134,16 @@ def getAnswerB():
 # gets the text from the image via pytesseract (OCR)
 # returns the text
 def getAnswerC():
-    DefiniereBereich_AntwortC = (AnswerC_UpperLeftCornerX, AnswerC_UpperLeftCornerY, AnswerC_LowerRightCornerX,
+    defineArea_AnswerC = (AnswerC_UpperLeftCornerX, AnswerC_UpperLeftCornerY, AnswerC_LowerRightCornerX,
                                  AnswerC_LowerRightCornerY)  # defines the area of Answer C
-    QuizmasterAntwortCArea = im.crop(
-        DefiniereBereich_AntwortC)  # slices the screenshot into the defined area for the answer C
-    AntwortC_SavePath = userpath + "\\cs_antwortc.png"
-    QuizmasterAntwortCArea.save(AntwortC_SavePath)
-    AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath), lang="deu")
-    if not AntwortCText:  # If AntwortCText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
-        AntwortCText = pytesseract.image_to_string(Image.open(AntwortC_SavePath), lang="deu", config='--psm 6')
-    return AntwortCText
+    quizmaster_answerC_area = im.crop(
+        defineArea_AnswerC)  # slices the screenshot into the defined area for the answer C
+    answerC_savepath = userpath + "\\cs_antwortc.png"
+    quizmaster_answerC_area.save(answerC_savepath)
+    answerC_text = pytesseract.image_to_string(Image.open(answerC_savepath), lang="deu") # todo make language configurable via config.ini
+    if not answerC_text:  # If answerC_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
+        answerC_text = pytesseract.image_to_string(Image.open(answerC_savepath), lang="deu", config='--psm 6') # todo make language configurable via config.ini
+    return answerC_text
 
 
 # getQuestion
