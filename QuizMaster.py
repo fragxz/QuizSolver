@@ -99,7 +99,7 @@ def getAnswerA():
                                  AnswerA_LowerRightCornerY)  # defines the area of Answer A
     quizmaster_answerA_area = im.crop(
         defineArea_AnswerA)  # slices the screenshot into the defined area for the answer A
-    answerA_savePath = userpath + "\\cs_antworta.png"
+    answerA_savePath = userpath + "\\cs_antworta.png"  # todo rename into ENG
     quizmaster_answerA_area.save(answerA_savePath)
     answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu")  # config='-psm 5' # todo make language configurable via config.ini
     if not answerA_text:  # If answerA_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
@@ -118,7 +118,7 @@ def getAnswerB():
     defineArea_AnswerB = (AnswerB_UpperLeftCornerX, AnswerB_UpperLeftCornerY, AnswerB_LowerRightCornerX,
                                  AnswerB_LowerRightCornerY)  # defines the area of Answer B
     quizmaster_answerB_area = im.crop(defineArea_AnswerB)  # slices the screenshot into the defined area for the answerB
-    answerB_savepath = userpath + "\\cs_antwortb.png"
+    answerB_savepath = userpath + "\\cs_antwortb.png" # todo rename into ENG
     quizmaster_answerB_area.save(answerB_savepath)
     AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu") # todo make language configurable via config.ini
     if not AnswerB_text:  # If AnswerB_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
@@ -138,7 +138,7 @@ def getAnswerC():
                                  AnswerC_LowerRightCornerY)  # defines the area of Answer C
     quizmaster_answerC_area = im.crop(
         defineArea_AnswerC)  # slices the screenshot into the defined area for the answer C
-    answerC_savepath = userpath + "\\cs_antwortc.png"
+    answerC_savepath = userpath + "\\cs_antwortc.png" # todo rename into ENG
     quizmaster_answerC_area.save(answerC_savepath)
     answerC_text = pytesseract.image_to_string(Image.open(answerC_savepath), lang="deu") # todo make language configurable via config.ini
     if not answerC_text:  # If answerC_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
@@ -213,7 +213,7 @@ def cleanHtmlResult():
     # -------------------- punctuation mark CLEARING
 
     # removes GOOGLE HEADER -------------
-    resultRemoveGoogleHeader = result_without_punctuation.split('ErgebnisseWortwörtlichUngefähr')
+    resultRemoveGoogleHeader = result_without_punctuation.split('ErgebnisseWortwörtlichUngefähr')  # todo GER words
     cleanedResult = resultRemoveGoogleHeader[0]
     # ------------- removes GOOGLE HEADER
 
@@ -224,16 +224,16 @@ def cleanHtmlResult():
 # prints the Result depending on the amount of matches (for exact and approximate matches)
 # the function will print additional notifications if the question is negated
 def printEvaluatedResult():
-    if exakteTreffer_A > 0:
-        print(f'\n A - EXAKTE TREFFER | {AnswerAText}:  {exakteTreffer_A}x  ||  {listA_exactMatches[:5]}')
+    if exactMatches_A > 0:
+        print(f'\n A - EXAKTE TREFFER | {AnswerAText}:  {exactMatches_A}x  ||  {listA_exactMatches[:5]}')
 
-    if exakteTreffer_B > 0:
-        print(f'\n B - EXAKTE TREFFER | {AnswerBText}:  {exakteTreffer_B}x  ||  {listB_exactMatches[:5]}')
+    if exactMatches_B > 0:
+        print(f'\n B - EXAKTE TREFFER | {AnswerBText}:  {exactMatches_B}x  ||  {listB_exactMatches[:5]}')
 
-    if exakteTreffer_C > 0:
-        print(f'\n C - EXAKTE TREFFER | {AnswerCText}:  {exakteTreffer_C}x  ||  {listC_exactMatches[:5]}')
+    if exactMatches_C > 0:
+        print(f'\n C - EXAKTE TREFFER | {AnswerCText}:  {exactMatches_C}x  ||  {listC_exactMatches[:5]}')
 
-    if ((exakteTreffer_A == 0) and (exakteTreffer_B == 0) and (exakteTreffer_C == 0)):
+    if ((exactMatches_A == 0) and (exactMatches_B == 0) and (exactMatches_C == 0)):
         if approximateMatches_A > 0:
             print(f'\n A - ungefähr | {Asplit}:  {approximateMatches_A}x  ||  {listA_approximateMatches[:5]}')
 
@@ -331,9 +331,9 @@ listC_exactMatches, approximateMatches_C, Csplit, listC_approximateMatches = Ans
                                                                                                      percentageProbabilityDictionary)
 
 # get amount of exact matches for A, B and C
-exakteTreffer_A = len(listA_exactMatches)
-exakteTreffer_B = len(listB_exactMatches)
-exakteTreffer_C = len(listC_exactMatches)
+exactMatches_A = len(listA_exactMatches)
+exactMatches_B = len(listB_exactMatches)
+exactMatches_C = len(listC_exactMatches)
 
 printEvaluatedResult()
 
