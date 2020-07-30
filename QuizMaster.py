@@ -4,9 +4,9 @@
 
 # TODO deutschen code refactored => into english
 
-zeitmessungAktiv = 0 #0 für aus, 1 für an. Zeitmessung bestimmt die Laufzeit des Skripts
+activateRunTimeMeasurement = 0 #0 für aus, 1 für an. Zeitmessung bestimmt die Laufzeit des Skripts
 
-if zeitmessungAktiv == 1:
+if activateRunTimeMeasurement == 1:
    import time
    start = time.time()
 
@@ -305,6 +305,6 @@ printEvaluatedResult()
 #webbrowser.open(urlC,new);
 #webbrowser.open(urlF,new);
 
-if zeitmessungAktiv == 1:
+if activateRunTimeMeasurement == 1:
    end = time.time()
    print(end - start)
