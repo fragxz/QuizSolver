@@ -6,7 +6,7 @@
 
 # import third party modules
 import time
-import pyperclip  # usedto save Var result into clipboard
+import pyperclip  # used to save Var result into clipboard
 import pytesseract
 import webbrowser
 import PIL.ImageGrab
@@ -24,7 +24,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-activateRunTimeMeasurement = 0  # 0 für aus, 1 für an. Zeitmessung bestimmt die Laufzeit des Skripts
+activateRunTimeMeasurement = 0  # 0 = OFF, 1 = ON, prints the RunTime
 if activateRunTimeMeasurement == 1:
     start = time.time()
 
@@ -33,7 +33,7 @@ devmode = config['CONFIG']['devmode']  # dev mode uses the "example.png"-file or
 debugResult = config['CONFIG']['logging']  # If debugResult = 1 > enables debugging of the result
 ImageSubdirectory = config['CONFIG']['ImageSubdirectory']  # subdirectory where the cropped images will be saved
 mratioDifferenceFloat = float(config['CONFIG']['mratioDifferenceFloat'])
-# float-value to define the ratio of likeness between the "real answer" and the found results by the script.
+#  float-value to define the ratio of likeness between the "real answer" and the found results by the script.
 #  example: if you compare "Egg" to "Egg" a ratio of 1.0 would lead to the exact result, but that is unrealistic,
 #  especially if you get results that uses the plural ("Eggs") you need a lower ratio than 1.0.
 #  a good value in my tests were 0.6 - 0.7
