@@ -259,10 +259,10 @@ def printEvaluatedResult():
 # SearchEngineUrls
 # defines the URLS for the AnswerA,B,C and the question
 def defineSearchEngineUrls():
-    urlA = google + AntwortAText
-    urlB = google + AntwortBText
-    urlC = google + AntwortCText
-    urlF = google + FrageTextReduziert + '&num=' + anzahlSuchergebnisse
+    urlA = searchEngineUrl + AntwortAText
+    urlB = searchEngineUrl + AntwortBText
+    urlC = searchEngineUrl + AntwortCText
+    urlF = searchEngineUrl + FrageTextReduziert + '&num=' + amount_searchResults
     return urlA, urlB, urlC, urlF
 
 
@@ -272,15 +272,15 @@ wahrscheinlichkeitenDictionary = {}
 
 # NAD = nummernAusgeschriebenDictionary
 # a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
-nummernAusgeschriebenDictionary = {"0": "null", "1": "eins", "2": "zwei", "3": "drei", "4": "vier", "5": "fünf",
+spelledOutNumbersDictionary = {"0": "null", "1": "eins", "2": "zwei", "3": "drei", "4": "vier", "5": "fünf",
                                    "6": "sechs", "7": "sieben", "8": "acht", "9": "neun", "10": "zehn", "11": "elf",
                                    "12": "zwölf", "13": "dreizehn", "14": "vierzehn", "15": "fünfzehn",
                                    "16": "sechszehn", "17": "siebzehn", "18": "achtzehn", "19": "neunzehn",
                                    "20": "zwangzig"}  # todo english words
 
 new = 2
-google = "https://www.google.de/search?q="
-anzahlSuchergebnisse = '30'
+searchEngineUrl = "https://www.google.de/search?q=" # todo make configurable via config.ini
+amount_searchResults = '30'
 
 # C O R E   L O G I C  ---------------------------------------------------------
 
@@ -313,7 +313,7 @@ exakteTreffer_ListA, ungefaehreTreffer_A, Asplit, ungefaehreTreffer_ListA = Answ
                                                                                                     cleanedResult,
                                                                                                     ergebnisliste,
                                                                                                     mratioDifferenceFloat,
-                                                                                                    nummernAusgeschriebenDictionary,
+                                                                                                    spelledOutNumbersDictionary,
                                                                                                     wahrscheinlichkeitenDictionary)
 exakteTreffer_ListB, ungefaehreTreffer_B, Bsplit, ungefaehreTreffer_ListB = AnswerFunctions.answerB(AntwortAText,
                                                                                                     AntwortBText,
@@ -321,7 +321,7 @@ exakteTreffer_ListB, ungefaehreTreffer_B, Bsplit, ungefaehreTreffer_ListB = Answ
                                                                                                     cleanedResult,
                                                                                                     ergebnisliste,
                                                                                                     mratioDifferenceFloat,
-                                                                                                    nummernAusgeschriebenDictionary,
+                                                                                                    spelledOutNumbersDictionary,
                                                                                                     wahrscheinlichkeitenDictionary)
 exakteTreffer_ListC, ungefaehreTreffer_C, Csplit, ungefaehreTreffer_ListC = AnswerFunctions.answerC(AntwortAText,
                                                                                                     AntwortBText,
@@ -329,7 +329,7 @@ exakteTreffer_ListC, ungefaehreTreffer_C, Csplit, ungefaehreTreffer_ListC = Answ
                                                                                                     cleanedResult,
                                                                                                     ergebnisliste,
                                                                                                     mratioDifferenceFloat,
-                                                                                                    nummernAusgeschriebenDictionary,
+                                                                                                    spelledOutNumbersDictionary,
                                                                                                     wahrscheinlichkeitenDictionary)
 
 # get amount of exact matches for A, B and C
