@@ -159,8 +159,8 @@ def getQuestion():
                               Question_LowerRightCornerY)  # defines the question-area
     quizmasterArea_question = im.crop(
         defineArea_question)  # slices the screenshot into the defined area for the question
-    question_savepath = userpath + "\\cs_frage.png"  # speicherort und name für die Frage
-    quizmasterArea_question.save(question_savepath)  # Befehl zum Speichern der Datei
+    question_savepath = userpath + "\\cs_frage.png"  # savepath and filename for the question
+    quizmasterArea_question.save(question_savepath)  # saves the file
     questionText = pytesseract.image_to_string(Image.open(userpath + "\\cs_frage.png"),
                                             lang="deu")  # command that converts the image into strings (it opens the image (that is located at the specified path), language packs / trained data for pytesseract))
     questionText = questionText.replace('\n', ' ')  # replaces the line break (\n) with a space for an optimized search
@@ -209,11 +209,11 @@ def cleanHtmlResult():
     # -------------------- CLEAN HTML TAGS
 
     # punctuation mark CLEARING --------------------
-    keineSatzzeichenResult = re.sub(r'[^\w\s]', '', htmlCleanedResult)
+    result_without_punctuation = re.sub(r'[^\w\s]', '', htmlCleanedResult)
     # -------------------- punctuation mark CLEARING
 
     # removes GOOGLE HEADER -------------
-    resultRemoveGoogleHeader = keineSatzzeichenResult.split('ErgebnisseWortwörtlichUngefähr')
+    resultRemoveGoogleHeader = result_without_punctuation.split('ErgebnisseWortwörtlichUngefähr')
     cleanedResult = resultRemoveGoogleHeader[0]
     # ------------- removes GOOGLE HEADER
 
