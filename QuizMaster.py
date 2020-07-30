@@ -120,10 +120,10 @@ def getAnswerB():
     quizmaster_answerB_area = im.crop(defineArea_AnswerB)  # slices the screenshot into the defined area for the answerB
     AntwortB_SavePath = userpath + "\\cs_antwortb.png"
     quizmaster_answerB_area.save(AntwortB_SavePath)
-    AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath), lang="deu")
-    if not AntwortBText:  # If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
-        AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath), lang="deu", config='--psm 6')
-    return AntwortBText
+    AnswerB_text = pytesseract.image_to_string(Image.open(AntwortB_SavePath), lang="deu")
+    if not AnswerB_text:  # If AnswerB_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
+        AnswerB_text = pytesseract.image_to_string(Image.open(AntwortB_SavePath), lang="deu", config='--psm 6')
+    return AnswerB_text
 
 
 # getAnswerC
