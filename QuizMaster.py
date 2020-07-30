@@ -95,16 +95,16 @@ else:
 # gets the text from the image via pytesseract (OCR)
 # returns the text
 def getAnswerA():
-    DefiniereBereich_AntwortA = (AnswerA_UpperLeftCornerX, AnswerA_UpperLeftCornerY, AnswerA_LowerRightCornerX,
+    defineArea_AnswerA = (AnswerA_UpperLeftCornerX, AnswerA_UpperLeftCornerY, AnswerA_LowerRightCornerX,
                                  AnswerA_LowerRightCornerY)  # defines the area of Answer A
-    QuizmasterAntwortAArea = im.crop(
-        DefiniereBereich_AntwortA)  # slices the screenshot into the defined area for the answer A
-    AntwortA_SavePath = userpath + "\\cs_antworta.png"
-    QuizmasterAntwortAArea.save(AntwortA_SavePath)
-    AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath), lang="deu")  # config='-psm 5'
-    if not AntwortAText:  # If AntwortAText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
-        AntwortAText = pytesseract.image_to_string(Image.open(AntwortA_SavePath), lang="deu", config='--psm 6')
-    return AntwortAText
+    quizmaster_answerA_area = im.crop(
+        defineArea_AnswerA)  # slices the screenshot into the defined area for the answer A
+    answerA_savePath = userpath + "\\cs_antworta.png"
+    quizmaster_answerA_area.save(answerA_savePath)
+    answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu")  # config='-psm 5'
+    if not answerA_text:  # If answerA_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
+        answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu", config='--psm 6')
+    return answerA_text
 
 
 # getAnswerB
@@ -115,12 +115,11 @@ def getAnswerA():
 # gets the text from the image via pytesseract (OCR)
 # returns the text
 def getAnswerB():
-    DefiniereBereich_AntwortB = (AnswerB_UpperLeftCornerX, AnswerB_UpperLeftCornerY, AnswerB_LowerRightCornerX,
+    defineArea_AnswerB = (AnswerB_UpperLeftCornerX, AnswerB_UpperLeftCornerY, AnswerB_LowerRightCornerX,
                                  AnswerB_LowerRightCornerY)  # defines the area of Answer B
-    QuizmasterAntwortBArea = im.crop(
-        DefiniereBereich_AntwortB)  # slices the screenshot into the defined area for the answer B
+    quizmaster_answerB_area = im.crop(defineArea_AnswerB)  # slices the screenshot into the defined area for the answerB
     AntwortB_SavePath = userpath + "\\cs_antwortb.png"
-    QuizmasterAntwortBArea.save(AntwortB_SavePath)
+    quizmaster_answerB_area.save(AntwortB_SavePath)
     AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath), lang="deu")
     if not AntwortBText:  # If AntwortBText does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
         AntwortBText = pytesseract.image_to_string(Image.open(AntwortB_SavePath), lang="deu", config='--psm 6')
