@@ -257,7 +257,7 @@ wahrscheinlichkeitenDictionary = {}
 #a list that contains the numbers and also the words in a range from 0-20. it is used for the results, because lower value numbers are often written as words.
 nummernAusgeschriebenDictionary = {"0":"null","1":"eins","2":"zwei","3":"drei","4":"vier","5":"fünf","6":"sechs","7":"sieben","8":"acht","9":"neun","10":"zehn","11":"elf","12":"zwölf","13":"dreizehn","14":"vierzehn","15":"fünfzehn","16":"sechszehn","17":"siebzehn","18":"achtzehn","19":"neunzehn","20":"zwangzig"} #todo english words
 
-new=2;
+new=2
 google = "https://www.google.de/search?q="
 anzahlSuchergebnisse = '30'
 
