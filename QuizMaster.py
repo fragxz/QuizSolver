@@ -101,7 +101,9 @@ def getAnswerA():
     answerA_savePath = userpath + "\\cs_antworta.png"  # todo rename into ENG
     quizmaster_answerA_area.save(answerA_savePath)
     answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu")  # config='-psm 5' # todo make language configurable via config.ini
-    if not answerA_text:  # If answerA_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single character
+    if not answerA_text:
+        # If answerA_text does not have a value, the answer may be a single character or letter only.
+        # In this case, activate the config to detect a single character
         answerA_text = pytesseract.image_to_string(Image.open(answerA_savePath), lang="deu", config='--psm 6') # todo make language configurable via config.ini
     return answerA_text
 
@@ -120,7 +122,9 @@ def getAnswerB():
     answerB_savepath = userpath + "\\cs_antwortb.png" # todo rename into ENG
     quizmaster_answerB_area.save(answerB_savepath)
     AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu") # todo make language configurable via config.ini
-    if not AnswerB_text:  # If AnswerB_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
+    if not AnswerB_text:
+        # If AnswerB_text does not have a value, it the answer may be a single character or letter only.
+        # In this case, activate the config to detect a single
         AnswerB_text = pytesseract.image_to_string(Image.open(answerB_savepath), lang="deu", config='--psm 6') # todo make language configurable via config.ini
     return AnswerB_text
 
@@ -140,7 +144,9 @@ def getAnswerC():
     answerC_savepath = userpath + "\\cs_antwortc.png" # todo rename into ENG
     quizmaster_answerC_area.save(answerC_savepath)
     answerC_text = pytesseract.image_to_string(Image.open(answerC_savepath), lang="deu") # todo make language configurable via config.ini
-    if not answerC_text:  # If answerC_text does not have a value, it the answer may be a single character or letter only. In this case, activate the config to detect a single
+    if not answerC_text:
+        # If answerC_text does not have a value, it the answer may be a single character or letter only.
+        # In this case, activate the config to detect a single
         answerC_text = pytesseract.image_to_string(Image.open(answerC_savepath), lang="deu", config='--psm 6') # todo make language configurable via config.ini
     return answerC_text
 
