@@ -18,8 +18,10 @@ import string
 import pathlib
 import os.path
 import re  # regex
-
 import configparser
+
+# import own modules
+import AnswerFunctions
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -60,8 +62,6 @@ AnswerC_LowerRightCornerY = int(config['LAYOUT']['AnswerC_LowerRightCornerY'])
 
 currentWorkingDir = pathlib.Path().absolute()
 
-# import own modules
-import AnswerFunctions
 
 
 # F U N C T I O N S ------------------------------------------------------------
