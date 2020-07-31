@@ -63,7 +63,6 @@ AnswerC_LowerRightCornerY = int(config['LAYOUT']['AnswerC_LowerRightCornerY'])
 currentWorkingDir = pathlib.Path().absolute()
 
 
-
 # F U N C T I O N S ------------------------------------------------------------
 
 # function cleanhtml - erases html tags from the result
